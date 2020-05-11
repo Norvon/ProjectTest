@@ -9,8 +9,7 @@
 import UIKit
 
 extension AppDelegate {
-    
-    func showRootVC(){
+    func showRootVC() {
         let tabbarVC = BaseTabbarVC()
         self.window = UIWindow(frame: UIScreen.main.bounds)
         self.window?.rootViewController = tabbarVC
