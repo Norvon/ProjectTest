@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3FAED0D7BA125487F460AB26 /* Pods_ProjectTestTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3592294BA7638D4634C500F /* Pods_ProjectTestTests.framework */; };
+		881AE2AF2468FFE8002D9280 /* ArrayExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881AE2AE2468FFE8002D9280 /* ArrayExtensions.swift */; };
 		88D90B4A2466843E00173190 /* BaseTabbarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D90B492466843E00173190 /* BaseTabbarVC.swift */; };
 		88D90B4D2466868300173190 /* BaseNavVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D90B4C2466868300173190 /* BaseNavVC.swift */; };
 		88D90B51246690B400173190 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D90B50246690B400173190 /* UIColorExtension.swift */; };
@@ -43,6 +44,7 @@
 		1C2965540F6D42A6F60B439A /* Pods-ProjectTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProjectTest.debug.xcconfig"; path = "Target Support Files/Pods-ProjectTest/Pods-ProjectTest.debug.xcconfig"; sourceTree = "<group>"; };
 		525FCF0855A2D4E0CCA0C176 /* Pods_ProjectTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ProjectTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5746AE1DD497ACE7BD4AC3B7 /* Pods-ProjectTestTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProjectTestTests.debug.xcconfig"; path = "Target Support Files/Pods-ProjectTestTests/Pods-ProjectTestTests.debug.xcconfig"; sourceTree = "<group>"; };
+		881AE2AE2468FFE8002D9280 /* ArrayExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensions.swift; sourceTree = "<group>"; };
 		88D90B492466843E00173190 /* BaseTabbarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BaseTabbarVC.swift; path = "../../../../../../Downloads/U17-master/U17/U17/Assets.xcassets/BaseTabbarVC.swift"; sourceTree = "<group>"; };
 		88D90B4C2466868300173190 /* BaseNavVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNavVC.swift; sourceTree = "<group>"; };
 		88D90B50246690B400173190 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 			isa = PBXGroup;
 			children = (
 				88D90B50246690B400173190 /* UIColorExtension.swift */,
+				881AE2AE2468FFE8002D9280 /* ArrayExtensions.swift */,
 			);
 			path = Extensiton;
 			sourceTree = "<group>";
@@ -461,6 +464,7 @@
 			files = (
 				88ED247C2464145400E7147C /* AppDelegateExtension.swift in Sources */,
 				88D90B4A2466843E00173190 /* BaseTabbarVC.swift in Sources */,
+				881AE2AF2468FFE8002D9280 /* ArrayExtensions.swift in Sources */,
 				88D90B51246690B400173190 /* UIColorExtension.swift in Sources */,
 				88ED244C2463E3F300E7147C /* AppDelegate.swift in Sources */,
 				88D90B5824669EF200173190 /* TestVC.swift in Sources */,
