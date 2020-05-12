@@ -7,16 +7,21 @@
 //
 
 import UIKit
+import Alamofire
+import IQKeyboardManagerSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    
+    lazy var reachability: NetworkReachabilityManager? = {
+       return NetworkReachabilityManager(host: "http://app.u17.com")
+    }()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
         showRootVC()
-        
         return true
     }
 
