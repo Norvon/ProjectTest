@@ -105,3 +105,65 @@ if john.residence?.printNumberOfRooms() != nil {
 } else {
     print("It was not possible to print the number of rooms.")
 }
+
+// 通过可选链访问下标
+if let firstRoomeName = john.residence?[0].name {
+    print("The first room name is \(firstRoomeName)")
+} else {
+    print("Unable to retrieve the first room name.")
+}
+john.residence?[0] = Room(name: "Bathroom")
+
+let johnsHouse = Residence()
+johnsHouse.rooms.append(Room(name: "Living Room"))
+johnsHouse.rooms.append(Room(name: "Kitchen"))
+john.residence = johnsHouse
+
+if let firstRoomName = john.residence?[0].name {
+    print("The first room name is \(firstRoomName).")
+} else {
+    print("Unable to retrieve the first room name.")
+}
+
+// 访问可选类型的下标
+print("访问可选类型的下标")
+var testScores = ["Dave": [86, 82, 84], "Bev": [79, 94, 81]]
+testScores["Dave"]?[0] = 91
+testScores["Bev"]?[0] += 1
+testScores["Brian"]?[0] = 72
+
+print(testScores)
+
+// 链的多层连接
+// * 如果你访问的只不是克选择项，它会因为可选链而变成可选项
+// * 如果你访问的值已经是可选项的，它不会因为可选链而变得更加可选
+
+if let johnsStreet = john.residence?.address?.street {
+    print("John's street name is \(johnsStreet).")
+} else {
+    print("Unable to retrieve the address.")
+}
+
+let johnsAddress = Address()
+johnsAddress.buildingName = "The Larches"
+johnsAddress.street = "Laurel Stret"
+john.residence?.address = johnsAddress
+
+if let johnsStreet = john.residence?.address?.street {
+    print("John's street name is \(johnsStreet)")
+} else {
+    print("Unable to retrieve the address.")
+}
+
+// 用可选返回值链接方法
+if let buildingIdentifier = john.residence?.address?.buildingIdentifier() {
+    print("John's building identifier is \(buildingIdentifier).")
+}
+
+if let beginsWithThe = john.residence?.address?.buildingIdentifier()?.hasPrefix("The") {
+    if beginsWithThe {
+        print("John's building identifier begins with \"the\".")
+    } else {
+        print("John's building identifier does not begin with \"The\".")
+    }
+}
