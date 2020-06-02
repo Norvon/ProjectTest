@@ -395,3 +395,28 @@ class SomeSubclass: SomeClass {
         
     }
 }
+
+// 通过闭包和函数来设置属性的默认值
+print("通过闭包和函数来设置属性的默认值")
+struct Chessboard {
+    let boardColors: [Bool] = {
+        var temporaryBoard = [Bool]()
+        var isBlack = false
+        for i in 1...8 {
+            for j in 1...8 {
+                temporaryBoard.append(isBlack)
+                isBlack = !isBlack
+            }
+            isBlack = !isBlack
+        }
+        print(temporaryBoard)
+        return temporaryBoard
+    }()
+    
+    func squareIsBlackAt(row: Int, column: Int) -> Bool {
+        return boardColors[(row * 8) + column]
+    }
+}
+
+let chessboard = Chessboard()
+print(chessboard.boardColors)
