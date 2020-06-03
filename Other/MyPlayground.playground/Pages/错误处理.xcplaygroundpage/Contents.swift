@@ -94,4 +94,42 @@ do {
 }
 
 // 转换错误为可选项
+func someThrowimgFunction() throws -> Int {
 
+    return 123
+}
+
+let x = try? someThrowimgFunction()
+
+let y: Int?
+do {
+    y = try someThrowimgFunction()
+} catch {
+    y = nil
+}
+
+
+//func fetchData() -> Data? {
+//    if let data = try? fetchDataFromDisk() { return data }
+//    if let data = try? fetchDataFromServer() { return data }
+//    return nil
+//}
+
+// 取消错误传递
+//let poto = try! loadImage("./Resources/John Appleseed.jpg")
+
+// 指定清除操作
+// defer 语句来在代码离开当前代码块前之下语句合集。
+//func processFile(filename: String) throws {
+//    if exits(filename) {
+//        let file = open(filename)
+//        defer {
+//            close(file)
+//        }
+//        while  let line = try file.readline() {
+//             // Work with the file.
+//        }
+//
+//        // close(file) is called here, at the end of the scope
+//    }
+//}
