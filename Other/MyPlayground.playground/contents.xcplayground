@@ -13,5 +13,7 @@
         <page name='继承'/>
         <page name='初始化'/>
         <page name='反初始化'/>
+        <page name='可选链'/>
+        <page name='错误处理'/>
     </pages>
 </playground>
