@@ -22,6 +22,7 @@ import Foundation
 protocol SomeProtocol {
     var mustBeSettable: Int { get set }
     var dodsNotNeedToBeSettable: Int { get }
+    static func someTypeMethod()
 }
 
 // 在协议中定义类型属性时在前面添加 static 关键字。当类的实现使用 class 或 static 关键字前缀声明类型属性要求时，这个规则仍然适用
@@ -56,4 +57,21 @@ var ncc1701 = Starship(name: "Enterprise", prefix: "USS")
 ncc1701.fullName
 
 // 方法要求
+protocol RandomNumberGenerator {
+    func random() -> Double
+}
+
+class LinearCongruentialGenerator: RandomNumberGenerator {
+    var lastRandom = 42.0
+    let m = 139968.0
+    let a = 3877.0
+    let c = 29573.0
+    func random() -> Double {
+        lastRandom = ((lastRandom * a + c).truncatingRemainder(dividingBy: m))
+        return lastRandom / m
+    }
+}
+let generator = LinearCongruentialGenerator()
+print("Here's a random number: \(generator.random())")
+print("And another one: \(generator.random())")
 
