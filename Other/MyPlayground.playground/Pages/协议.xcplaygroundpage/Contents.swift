@@ -23,6 +23,7 @@ protocol SomeProtocol {
     var mustBeSettable: Int { get set }
     var dodsNotNeedToBeSettable: Int { get }
     static func someTypeMethod()
+    init(someParamter: Int)
 }
 
 // 在协议中定义类型属性时在前面添加 static 关键字。当类的实现使用 class 或 static 关键字前缀声明类型属性要求时，这个规则仍然适用
@@ -75,3 +76,54 @@ let generator = LinearCongruentialGenerator()
 print("Here's a random number: \(generator.random())")
 print("And another one: \(generator.random())")
 
+// 异变方法要求
+protocol Togglable {
+    mutating func toggle()
+}
+
+enum OnOffSwitch: Togglable {
+    case off, on
+    mutating func toggle() {
+        switch self {
+        case .on:
+            self = .off
+        case .off:
+            self = .on
+        }
+    }
+}
+
+var lightSwitch = OnOffSwitch.off
+lightSwitch.toggle()
+
+
+// 协议初始化器要求的类实现
+//class SomeClass: SomeProtocol {
+//    required init(someParamter: Int) {
+//        <#code#>
+//    }
+//}
+//如果一个子类重写了父类指定的初始化器，并且遵循协议实现了初始化器要求，那么就要为这个初始化器的实现添加 required 和 override 两个修饰符：
+
+// 可失败初始化器要求
+
+// 将协议作为类型
+class Dice {
+    let sides: Int
+    let geneerator: RandomNumberGenerator
+    init(sides: Int, generator: RandomNumberGenerator) {
+        self.sides = sides
+        self.geneerator = generator
+    }
+
+    func roll() -> Int {
+        return Int(geneerator.random() * Double(sides)) + 1
+    }
+}
+
+var d6 = Dice(sides: 6, generator: LinearCongruentialGenerator())
+for _ in 1...5 {
+    print("Random dice rool is \(d6.roll())")
+}
+
+// 委托
