@@ -21,5 +21,6 @@
         <page name='协议'/>
         <page name='泛型'/>
         <page name='不透明类型'/>
+        <page name='自动引用计数'/>
     </pages>
 </playground>
