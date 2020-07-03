@@ -20,5 +20,6 @@
         <page name='扩展'/>
         <page name='协议'/>
         <page name='泛型'/>
+        <page name='不透明类型'/>
     </pages>
 </playground>
