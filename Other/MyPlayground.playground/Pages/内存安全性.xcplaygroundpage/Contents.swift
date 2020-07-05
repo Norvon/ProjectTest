@@ -1,7 +1,10 @@
-//: [Previous](@previous)
 
 import Foundation
-
 var str = "Hello, playground"
 
-//: [Next](@next)
+// 在方法中对 self 的访问冲突
+// 结构体中的异变方法可以在方法调用时对 self 进行写入访问
+
+// * 你只访问实例的存储属性，不是计算属性或者类属性
+// * 结构体是局部变量而非全局变量
+// * 结构体要么没有被闭包捕获要么只被非逃逸闭包捕获。

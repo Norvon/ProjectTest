@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<playground version='6.0' target-platform='ios'>
+<playground version='6.0' target-platform='ios' display-mode='raw'>
     <pages>
         <page name='概况'/>
         <page name='基础内容'/>
@@ -22,5 +22,6 @@
         <page name='泛型'/>
         <page name='不透明类型'/>
         <page name='自动引用计数'/>
+        <page name='内存安全性'/>
     </pages>
 </playground>
