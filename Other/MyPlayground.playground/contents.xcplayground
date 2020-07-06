@@ -23,5 +23,6 @@
         <page name='不透明类型'/>
         <page name='自动引用计数'/>
         <page name='内存安全性'/>
+        <page name='访问控制'/>
     </pages>
 </playground>
