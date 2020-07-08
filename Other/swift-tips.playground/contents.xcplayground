@@ -5,5 +5,7 @@
         <page name='将 protocol 的方法声明为 mutating'/>
         <page name='Sequence'/>
         <page name='多元组 (Tuple)'/>
+        <page name='@autoclosure 和 ??'/>
+        <page name='Optional Chaining'/>
     </pages>
 </playground>
