@@ -4,5 +4,6 @@
         <page name='柯里化'/>
         <page name='将 protocol 的方法声明为 mutating'/>
         <page name='Sequence'/>
+        <page name='多元组 (Tuple)'/>
     </pages>
 </playground>
