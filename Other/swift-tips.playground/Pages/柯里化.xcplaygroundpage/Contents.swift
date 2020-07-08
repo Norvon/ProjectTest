@@ -77,4 +77,15 @@ let depositor = BankAccount.deposit(_:)
 depositor(acount)(100)
 acount.balance
 
-//: [Next](@next)
+
+extension String {
+    func withdrawMessage() -> String {
+        return self + "撤回了一条消息"
+    }
+}
+
+let nama = "\"哈哈😄\""
+
+nama.withdrawMessage()
+String.withdrawMessage(nama)()
+//: [将 protocol 的方法声明为 mutating](@next)
