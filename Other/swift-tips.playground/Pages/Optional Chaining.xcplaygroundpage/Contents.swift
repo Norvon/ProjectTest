@@ -85,4 +85,47 @@ func incrementor(variable: inout Int) {
 }
 
 // 字面量表达
+
+enum MyBool: Int {
+    case myTure, myFalse
+}
+
+extension MyBool: ExpressibleByBooleanLiteral {
+    init(booleanLiteral value: BooleanLiteralType) {
+        self = value ? .myTure : .myFalse
+    }
+}
+
+let myTrue: MyBool = true
+let myFalse: MyBool = false
+myTrue.rawValue
+myFalse.rawValue
+
+class Person: ExpressibleByStringLiteral {
+    let name: String
+    init(name value: String) {
+        self.name = value
+    }
+
+    required convenience init(stringLiteral value: StringLiteralType) {
+//        self.name = value
+        self.init(name: value)
+    }
+
+    required convenience init(extendeGraphemeClusterLiteral value: String) {
+//        self.name = value
+        self.init(name: value)
+    }
+
+    required convenience init(unicodeScalarLiteral value: String) {
+//        self.name = value
+        self.init(name: value)
+    }
+}
+
+let p: Person = "xiaoMing"
+print(p.name)
+
+// 下标
+
 //: [Next](@next)
