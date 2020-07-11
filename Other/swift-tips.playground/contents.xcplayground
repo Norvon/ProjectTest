@@ -7,5 +7,6 @@
         <page name='多元组 (Tuple)'/>
         <page name='@autoclosure 和 ??'/>
         <page name='Optional Chaining'/>
+        <page name='方法嵌套'/>
     </pages>
 </playground>
