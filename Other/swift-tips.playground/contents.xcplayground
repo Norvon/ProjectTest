@@ -9,5 +9,6 @@
         <page name='Optional Chaining'/>
         <page name='方法嵌套'/>
         <page name='初始化方法顺序'/>
+        <page name='多类型和容器'/>
     </pages>
 </playground>
