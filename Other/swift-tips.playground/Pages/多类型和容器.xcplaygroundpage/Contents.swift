@@ -37,4 +37,6 @@ func sayHello2(str1: String = "Hello", str2: String, str3: String = "World") {
 
 sayHello1(str2:"12", str3: "34")
 
+// 协议和类方法中的 Self
+
 //: [Next](@next)
