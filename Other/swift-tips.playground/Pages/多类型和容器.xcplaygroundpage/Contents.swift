@@ -135,5 +135,85 @@ let b = B()
 b.number = 0
 
 // final
+// 不希望被继承和重写
+// * 类或者方法的功能确实已经完备了
+// * 子类继承和修改是一件危险的事情
+// * 为了父类中某些代码一定会被执行
+// * 性能考虑
 
+class Parent {
+    final func method() {
+        print("开始配置")
+        methodImpl()
+
+        print("结束配置")
+
+    }
+
+    func methodImpl() {
+        fatalError("子类必须实现这个方法")
+    }
+}
+
+class Child: Parent {
+    override func methodImpl() {
+        print("子类实现了methodImpl")
+    }
+}
+
+let tChild = Child()
+tChild.method()
+
+// lazy 修饰符和 lazy 方法
+
+class ClassA {
+//    lazy var str: String = {
+//        let str = "Hello"
+//        print("只在首次访问输出")
+//        return str
+//    }()
+    lazy var str: String = "Hello"
+}
+
+let classA = ClassA()
+classA.str
+
+//let data = 1...3
+//let result = data.map {
+//    (i: Int) -> Int in
+//    print("正在处理\(i)")
+//    return i * 2
+//}
+//
+//print("准备访问结果")
+//for i in result {
+//    print("操作后结果为\(i)")
+//}
+//
+//print("操作完成")
+//正在处理1
+//正在处理2
+//正在处理3
+//准备访问结果
+//操作后结果为2
+//操作后结果为4
+//操作后结果为6
+//操作完成
+
+let data = 1...3
+let result = data.lazy.map {
+    (i: Int) -> Int in
+    print("正在处理\(i)")
+    return i * 2
+}
+
+print("准备访问结果")
+for i in result {
+    print("操作后结果为\(i)")
+    if (i > 1) {
+        break
+    }
+}
+
+print("操作完成")
 //: [Next](@next)
