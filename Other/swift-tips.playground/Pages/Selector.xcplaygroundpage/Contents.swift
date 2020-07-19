@@ -154,7 +154,7 @@ func delay(_ time: TimeInterval, task: @escaping ()->()) -> Task? {
 
     dispatch_later {
         if let delayedClosure = result {
-            delayedClosur(false)
+            delayedClosure(false)
         }
     }
 
@@ -174,6 +174,8 @@ let task = delay(5) {
 }
 
 cancel(task)
+
+
 
 //: [Next](@next)
 
