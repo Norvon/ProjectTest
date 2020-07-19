@@ -12,5 +12,6 @@
         <page name='多类型和容器'/>
         <page name='Reflection 和 Mirror'/>
         <page name='Selector'/>
+        <page name='获取对象类型'/>
     </pages>
 </playground>
