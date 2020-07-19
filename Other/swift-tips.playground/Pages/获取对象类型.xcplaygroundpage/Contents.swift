@@ -61,4 +61,26 @@ class AnotherClass: NSObject {
 let anotherClass = AnotherClass()
 
 // 局部 scope
+func locak(_ closure: ()->()) {
+    closure()
+}
+
+import UIKit
+
+locak {
+    let titleLabel = UILabel(frame: CGRect(x: 150, y: 30, width: 200, height: 40))
+
+}
+
+do {
+    let titleLabel = UILabel(frame: CGRect(x: 150, y: 30, width: 200, height: 40))
+}
+
+let titleLabel: UILabel = {
+    let label = UILabel(frame: CGRect(x: 150, y: 30, width: 200, height: 40))
+    return label
+}()
+
+print("判等")
+
 //: [Next](@next)
