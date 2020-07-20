@@ -82,5 +82,36 @@ let titleLabel: UILabel = {
 }()
 
 print("判等")
+let str1 = "快乐的字符串"
+let str2 = "快乐的字符串"
+let str3 = "开心的字符串"
 
+str1 == str2
+str1 == str3
+
+class TodoItem {
+    let uuid: String
+    var title: String
+    
+    init(uuid: String, title: String) {
+        self.uuid = uuid
+        self.title = title
+    }
+}
+
+extension TodoItem: Equatable {
+    
+}
+
+func ==(lhs: TodoItem, rhs: TodoItem) -> Bool {
+    return lhs.uuid == rhs.uuid
+}
+
+// 对于 NSObject 子类的判等你有两种选择，要么重载 == ，要么重写 -isEqual:
+// 原来 Objective-C 中使用 == 进行的对象指针的判定，在 Swift 中提供的是另一个操作符 === 。
+// Swift 中对 NSObject 子类对象使用 == 时要是该子类没有实现这个操作符重 载的话将回滚到 -isEqual: 方法。
+let num = 19
+print(num.hashValue)
+
+// 某些对象的哈希值 有可能随着系统环境或者时间的变化而改变。因此你也不应该依赖于哈希值来构建一些需要确定 对象唯一性的功能，在绝大部分情况下，你将会得到错误的结果。
 //: [Next](@next)
