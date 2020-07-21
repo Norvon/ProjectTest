@@ -13,5 +13,6 @@
         <page name='Reflection 和 Mirror'/>
         <page name='Selector'/>
         <page name='获取对象类型'/>
+        <page name='随机数生成'/>
     </pages>
 </playground>
