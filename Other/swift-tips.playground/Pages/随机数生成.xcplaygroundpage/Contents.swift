@@ -159,6 +159,7 @@ extension UIImage {
 }
 
 extension UIViewController {
+    
     func performSegue(withName segueName: SegueName, sender: Any?) {
         performSegue(withIdentifier: segueName.rawValue, sender: sender)
     }
@@ -233,4 +234,13 @@ do {
     print("出错了: \(error)")
 }
 
+
+/// 描述
+/// - Parameter key: 输入 key
+/// - Returns: 返回 key
+func tet(_ key: String) -> String {
+    return key
+}
+
+// Swift 中的测试
 //: [Next](@next)"
