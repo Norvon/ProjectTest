@@ -118,6 +118,56 @@ let roomTemperature = convertToKelvin(27)
 //我们在 Swift Compiler - Custom Flags 中的 Other Swift Flags 中添加 -assert-config Debug 来强制启用断言，或者 -assert-config Release 来强制禁用断言。
 
 // fatalError
+//let array: NSArray = [1, 2, 3]
+//array[100]
 
+let array = [1, 2, 3]
+//array[100]
+
+enum MyEnum {
+    case Value1, Value2, Value3
+}
+
+func check(someValue: MyEnum) -> String {
+    switch someValue {
+    case .Value1:
+        return "OK"
+    case .Value2:
+        return "Mybe OK"
+    default:
+        fatalError("Should not show!")
+    }
+}
+
+//check(someValue: .Value3)
+
+// 确保子类实现这些方法，而父类中的方法不被错误地调用，我们就可以 利用 fatalError 来在父类中强制抛出错误
+
+import UIKit
+enum ImageName: String {
+    case myImage = "my_image"
+}
+
+enum SegueName: String {
+    case mySegue = "my_segue"
+}
+
+extension UIImage {
+    convenience init!(imageName: ImageName) {
+        self.init(named: imageName.rawValue)
+    }
+}
+
+extension UIViewController {
+    func performSegue(withName segueName: SegueName, sender: Any?) {
+        performSegue(withIdentifier: segueName.rawValue, sender: sender)
+    }
+}
+
+let image = UIImage(imageName: .myImage)
+
+//performSegue(withName: .mySegue, sender: self)
+
+// Playground 延迟运行
 
 //: [Next](@next)"
