@@ -16,6 +16,13 @@ class TestVC: UIViewController {
         self.view.backgroundColor = UIColor.random
     }
     
-    func 
+    func strLength(_ str: String?) -> Int {
+        if let s = str {
+            return s.count
+        } else {
+            return 0
+        }
+    }
+    
 
 }
