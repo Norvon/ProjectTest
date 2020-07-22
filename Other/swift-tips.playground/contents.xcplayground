@@ -14,5 +14,6 @@
         <page name='Selector'/>
         <page name='获取对象类型'/>
         <page name='随机数生成'/>
+        <page name='Swift 中的测试'/>
     </pages>
 </playground>
