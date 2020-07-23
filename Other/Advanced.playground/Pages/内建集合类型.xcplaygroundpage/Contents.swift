@@ -108,7 +108,7 @@ t = tArr.sorted{
 t
 
 let storeVersion = "3.14.10"
-let currentVersion = "3.130.10"
+let currentVersion = "3.13.10"
 
 extension String {
     func versionToInt() -> [Int] {
@@ -405,7 +405,7 @@ do {
 //    slice[0] 会崩溃，应为 切片是从 1 开始的
     // slice[0]
     slice[2] = 100
-    Unmanaged.passUnretained(fibs as AnyObject).toOpaque()
+//    Unmanaged.passUnretained(fibs as AnyObject).toOpaque()
     let newArray = Array(slice)
     type(of: newArray)
     fibs
