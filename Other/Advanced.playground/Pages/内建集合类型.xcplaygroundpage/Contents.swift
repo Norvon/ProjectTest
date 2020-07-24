@@ -60,9 +60,9 @@ t = arr.filter {
 }
 t
 
-//mutalbleFibs.popLast()
-//mutalbleFibs.removeAll()
-//mutalbleFibs.removeLast()
+// mutalbleFibs.popLast()
+// mutalbleFibs.removeAll()
+// mutalbleFibs.removeLast()
 
 extension Array {
     func myMap<T>(_ transform:(Element) -> T) -> [T] {
@@ -97,9 +97,9 @@ t = tArr.reduce(into: "", { (result, value) in
 })
 t
 //
-//sort()与sorted()的不同在于，sort是在原位重新排列列表，而sorted()是产生一个新的列表。
+// sort()与sorted()的不同在于，sort是在原位重新排列列表，而sorted()是产生一个新的列表。
 //
-//sort 是应用在 list 上的方法，sorted 可以对所有可迭代的对象进行排序操作。
+// sort 是应用在 list 上的方法，sorted 可以对所有可迭代的对象进行排序操作。
 arr.sort(by: >)
 arr
 t = tArr.sorted{
@@ -136,7 +136,7 @@ let uhOh = someArray.withUnsafeBufferPointer {
     return ptr
 }
 
-//print(uhOh[10])
+// print(uhOh[10])
 
 do {
     let arr = [5, 4, 3, 2, 1]
