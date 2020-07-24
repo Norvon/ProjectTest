@@ -2,6 +2,6 @@
 
 import Foundation
 
-var str = "Hello, playground"
+// 通过枚举解决魔法数的问题
 
 //: [Next](@next)
