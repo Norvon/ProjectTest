@@ -106,7 +106,46 @@ let evenIndices = indices.filter{ $0 % 2 == 0}
 // CharacterSet 是一个高效的存储 Unicode 编码点 (code point) 的集合
 
 // 在闭包中使用集合
+extension Sequence where Element: Hashable {
+    func unique() -> [Element] {
+        var seen: Set<Element> = []
+        return filter {
+            if seen.contains($0) {
+                return false
+            } else {
+                seen.insert($0)
+                return true
+            }
+        }
+    }
+}
 
+[1, 2, 3, 12, 1, 3, 4, 5, 6, 4, 6].unique()
+
+// Range
+
+let singleDigitNumbers = 0..<10
+Array(singleDigitNumbers)
+let singleDigitNumbers1 = 0...10
+Array(singleDigitNumbers1)
+
+let lowercaseLetters = Character("a")...Character("z")
+
+let fromZero = 0...
+let upToZ = ..<Character("z")
+
+singleDigitNumbers.contains(9)
+singleDigitNumbers1.contains(10)
+lowercaseLetters.overlaps("c"..<"f")
+
+// 只有半开范围能表达空间隔 (也就是下界和上界相等的情况，比如 5..<5)。
+// 只有闭合范围能包括其元素类型所能表达的最大值 (比如 0...Int.max)。而半开范围则要求范围上界是一个比自身所包含的最大值还要大 1 的值。
+
+// 可数范围
+for i in 0..<10 {
+    print("\(i)", terminator: " ")
+}
+singleDigitNumbers.last
 //: [Next](@next)
 
 
