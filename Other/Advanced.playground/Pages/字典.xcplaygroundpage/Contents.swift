@@ -146,6 +146,15 @@ for i in 0..<10 {
     print("\(i)", terminator: " ")
 }
 singleDigitNumbers.last
+
+let arr = [1, 2, 3, 4]
+arr[2...]
+arr[..<1]
+arr[1...2]
+arr[...]
+type(of: arr[...])
+type(of: arr[2...])
+type(of: arr)
 //: [Next](@next)
 
 
