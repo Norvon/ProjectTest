@@ -82,5 +82,37 @@ while let i = iterator2.next() {
 }
 
 // 双重可选值
+let stringNumbers = ["1", "2", "three"]
+let maybeInts = stringNumbers.map {Int($0)}
+maybeInts.count
 
+for maybeInt in maybeInts {
+    print(maybeInt)
+}
+
+var itemrator = maybeInts.makeIterator()
+while let maybeint = itemrator.next() {
+    print(maybeint, terminator: " ")
+}
+print()
+
+for case let i? in maybeInts {
+    print(i, terminator: " ")
+}
+print()
+
+for case nil in maybeInts {
+    print("No value")
+}
+
+for case let .some(i) in maybeInts {
+    print(i)
+}
+
+let j = 5
+if case 0..<10 = j {
+    print("\(j)")
+}
+
+// if var and while var 
 //: [Next](@next)
