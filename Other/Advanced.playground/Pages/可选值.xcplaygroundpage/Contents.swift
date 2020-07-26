@@ -114,5 +114,55 @@ if case 0..<10 = j {
     print("\(j)")
 }
 
-// if var and while var 
+// if var and while var
+let number = "1"
+if var i = Int(number) {
+    i += 1
+    print(i)
+}
+
+let array2 = [1, 2, 3]
+if !array2.isEmpty {
+    print(array2[0])
+}
+
+extension String {
+    var fileExtension: String? {
+        let period: String.Index
+        if let idx = lastIndex(of: ".") {
+            period = idx
+        } else {
+            return nil
+        }
+        let extensionStart = index(after: period)
+        return String(self[extensionStart...])
+    }
+
+    var fileExtension2: String? {
+        guard let period = lastIndex(of: ".") else {
+            return nil
+        }
+
+        let extensionStart = index(after: period)
+        return String(self[extensionStart...])
+    }
+}
+
+"hello.txt".fileExtension
+"hello.txt".fileExtension2
+
+func doStuff(withArray a: [Int]) {
+    guard let firstElement = a.first else {
+        return
+    }
+    firstElement
+}
+
+func unimplemented() -> Never {
+    fatalError("This code path is not implemented yet.")
+}
+
+// 可选链
+
+
 //: [Next](@next)
