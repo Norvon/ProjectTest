@@ -32,10 +32,38 @@ func doubler(i: Int) -> Int {
 let dobuleAlt = { (i: Int) -> Int in return i * 2}
 [1, 2, 3, 4].map(dobuleAlt)
 
+// 使用匿名函数的方法：你可以在定义一个表达式的同时，对它进行调用。这个方法贼定义那些初始化时代吗多余一行的属性时会很有用。
+print([1, 2, 3].map{ $0 * 2 })
 
+[1, 2, 3].map { (i: Int) -> Int in return i * 2}
+[1, 2, 3].map({i in return i * 2})
+[1, 2, 3].map({i in i * 2})
+[1, 2, 3].map({$0 * 2})
+[1, 2, 3].map(){$0 * 2}
+[1, 2, 3].map{$0 * 2}
 
+print((0..<3).map{_ in Int.random(in: 1..<100)})
 
+let isEven = {$0 % 2 == 0}
+isEven(2)
+isEven(3)
 
+let isEvenAlt = { (i: Int8) -> Bool in i % 2 == 0 }
+let isEvenAlt2: (Int8) -> Bool = { $0 % 2 == 0 }
+let isEvenAlt3 = { $0 % 2 == 0 } as (Int8) -> Bool
+
+extension BinaryInteger {
+    var isEvent: Bool{ return self % 2 == 0}
+}
+
+func isEvent<T: BinaryInteger>(_ i: T) -> Bool {
+    return i % 2 == 0
+}
+
+// Cannot convert value of type '(Int) -> Bool' to specified type '(Int8) -> Bool'
+// let int8isEven: (Int8) -> Bool = isEven
+
+// 函数的灵活性
 
 
 //: [Next](@next)
