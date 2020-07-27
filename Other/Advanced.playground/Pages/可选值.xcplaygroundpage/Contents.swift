@@ -3,13 +3,13 @@
 import Foundation
 
 // 通过枚举解决魔法数的问题
-enum Optional<Wrapped> {
+enum Optional1<Wrapped> {
     case none
     case some(Wrapped)
 }
 
 extension Collection where Element: Equatable {
-    func tFirstIndex(of element: Element) -> Optional<Index> {
+    func tFirstIndex(of element: Element) -> Optional1<Index> {
         var idx = startIndex
         while idx != endIndex {
             if self[idx] == element {
@@ -305,14 +305,14 @@ let firstChar = characters.map { (c) -> String in
     return String(c)
 }
 
-//extension Optional {
-//    func map<U>(transform: (Wrapped) -> U) -> U? {
-//        guard let value = self else {
-//            return nil
-//        }
-//        return transform(value)
-//    }
-//}
+extension Optional {
+    func map<U>(transform: (Wrapped) -> U) -> U? {
+        guard let value = self else {
+            return nil
+        }
+        return transform(value)
+    }
+}
 
 extension Array {
     func reduce1(_ nextPartialResult: (Element, Element) -> Element) -> Element? {
@@ -334,6 +334,96 @@ extension Array {
 [1, 2, 3, 4].reduce2(+)
 
 // 可选值 flatMap
+let stringNumbers2 = ["1", "2", "3", "foo"]
+let x = stringNumbers2.first.map { Int($0) }
+let y = stringNumbers2.first.flatMap { Int($0) }
+
+if let a = stringNumbers2.first, let b = Int(a) {
+    print(b)
+}
+
+let urlString = "https://www.objc.io/log.png"
+let view = URL(string: urlSting)
+    .flatMap { try? Data(contentsOf: $0) }
+    .flatMap { UIImage(data: $0) }
+    .map {UIImageView(image: $0)}
+
+if let view = view {
+    // ...
+}
+
+extension Optional {
+    func flatMap<U>(transform: (Wrapped) -> U?) -> U? {
+        if let value = self, let transformed = transform(value) {
+            return transformed
+        }
+        return nil
+    }
+}
+
+// 使用 compactMap 过滤 nil
+let numbers3 = ["1", "2", "3", "foo"]
+var sum = 0
+for case let i? in numbers3.map({ Int($0)}) {
+    sum += i
+}
+
+let n = numbers3.compactMap{ Int($0) }.reduce(0, +)
+n
+
+extension Sequence {
+    func companctMap<B>(_ transform: (Element) -> B?) -> [B] {
+        return lazy
+            .map(transform)
+            .filter{ $0 != nil}
+            .map{ $0! }
+    }
+}
+
+// 可选值判等
+let regex = "^Hello$"
+if regex.first == "^" {
+    print("匹配开头")
+}
+
+extension Optional: Equatable where Wrapped: Equatable {
+    static func == (lhs: Wrapped?, rhs: Wrapped?) -> Bool {
+        switch(lhs, rhs) {
+        case (nil, nil):
+            return true
+        case let (x?, y?):
+            return x == y
+            case (_?, nil),
+                 (nil, _?):
+            return false
+        }
+    }
+}
+
+
+var dictWithNils: [String: Int?] = [
+    "one": 1,
+    "two": 2,
+    "none": nil
+]
+
+// dictWithNils["two"] = nil // 当前操作会移除 "tow": 2
+ dictWithNils
+
+// dictWithNils["two"] = Optional(nil) // 会移除 "tow": 2
+// dictWithNils
+
+// dictWithNils["two"] = .some(nil)
+// dictWithNils
+
+dictWithNils["two"]? = nil // 存在 key
+dictWithNils
+
+dictWithNils["three"]? = nil // 不存在的 key，没有值会被更新或者插入
+dictWithNils
+
+// 可选值比较
+
 
 
 //:[Next](@next)
