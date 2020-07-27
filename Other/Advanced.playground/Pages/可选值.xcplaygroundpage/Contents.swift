@@ -163,6 +163,177 @@ func unimplemented() -> Never {
 }
 
 // 可选链
+let str: String? = "Never say never"
+let upper: String
+if str != nil {
+    upper = str!.uppercased()
+} else {
+    fatalError("no idea what to do now...")
+}
+
+let lower = str?.uppercased().lowercased()
+
+extension Int {
+    var half: Int? {
+        guard self < -1 || self > 1 else {
+            return nil
+        }
+        return self / 2
+    }
+}
+
+print(20.half?.half?.half)
+
+let dictOfArrays = ["nine":[0, 1, 2, 3]]
+dictOfArrays["nine"]?[3]
+
+let dictOfFunctions: [String: (Int, Int) -> Int] = [
+    "add": (+),
+    "subtract": (-)
+]
+dictOfFunctions["add"]
+dictOfFunctions["add"]?(1, 1)
+dictOfFunctions["subtract"]?(1, 1)
+
+(==)(1, 2)
+(+)(1, 2)
+(-)(1, 2)
+(*)(1, 2)
+(/)(1, 2)
+
+class TextField {
+    private(set) var text = ""
+    var didChange: ((String) -> ())?
+    
+    func textDidChange(newText: String) {
+        text = newText
+        didChange?(text)
+    }
+}
+
+struct Person {
+    var name: String
+    var age: Int
+}
+
+var optionalLisa: Person? = Person(name: "Lisa Simpson", age: 8)
+if optionalLisa != nil {
+    optionalLisa!.age += 1
+}
+
+if var lisa = optionalLisa {
+    lisa.age += 1
+}
+
+optionalLisa?.age += 1
+
+var a: Int? = 5
+a? = 10
+a // Opthonal(10)
+
+var b: Int? = nil
+b? = 10
+b
+
+// b本身已经是 nil 给 b? 赋值不会生效
+
+// nil 合并运算符
+let stringteger = "1"
+let number1 = Int(stringteger) ?? 0
+
+let array3 = [1, 2, 3]
+!array3.isEmpty ? array3[0] : 0
+
+array3.first ?? 0
+array3.count > 5 ? array[5] : "0"
+
+extension Array {
+    subscript(guarded idx: Int) -> Element? {
+        guard (startIndex..<endIndex).contains(idx) else {
+            return nil
+        }
+        return self[idx]
+    }
+}
+array3[guarded: 5] ?? 0
+
+let i1: Int? = nil
+let j1: Int? = nil
+let k1: Int? = 42
+i1 ?? j1 ?? k1 ?? 0
+
+// a ?? b ?? c 和 (a ?? b) ?? c
+// a ?? b ?? c 是合并操作的链接
+// (a ?? b) ?? c 是先解包括号内的内容，然后再处理外层
+let s1: String?? = nil
+(s1 ?? "inner") ?? "outer"
+let s2: String?? = .some(nil) // Opthinal(nil) != nil
+(s2 ?? "inner") ?? "outer"
+
+// ?? 操作符 为短路求值
+
+// 在字符串插值中使用可选值
+let bodyTemperature: Double? = 37.0
+let bloodGlucose: Double? = nil
+print(bodyTemperature)
+print("Blood glucose level: \(bloodGlucose)")
+
+infix operator ???: NilCoalescingPrecedence
+
+public func ???<T>(optaonal: T?, defaultValue: @autoclosure () -> String) -> String {
+    switch optaonal {
+    case let value?:
+        return String(describing: value)
+    case nil:
+        return defaultValue()
+    }
+}
+
+print("Body temperature: \(bodyTemperature ??? "n/a")")
+print("Blood glucose level: \(bloodGlucose ??? "n/a")")
+
+// 可选值 map
+let characters: [Character] = ["a", "b", "c"]
+String(characters[0])
+var firstCharAsString: String? = nil
+if let char = characters.first {
+    firstCharAsString = String(char)
+}
+
+let firstChar = characters.map { (c) -> String in
+    print(c)
+    return String(c)
+}
+
+//extension Optional {
+//    func map<U>(transform: (Wrapped) -> U) -> U? {
+//        guard let value = self else {
+//            return nil
+//        }
+//        return transform(value)
+//    }
+//}
+
+extension Array {
+    func reduce1(_ nextPartialResult: (Element, Element) -> Element) -> Element? {
+        guard let fst = first else {
+            return nil
+        }
+        
+        return dropFirst().reduce(fst, nextPartialResult)
+    }
+    
+    func reduce2(_ nextPartialResult: (Element, Element) -> Element) -> Element? {
+        return first.map { (e) -> Element in
+            dropFirst().reduce(e, nextPartialResult)
+        }
+    }
+}
+
+[1, 2, 3, 4].reduce1(+)
+[1, 2, 3, 4].reduce2(+)
+
+// 可选值 flatMap
 
 
-//: [Next](@next)
+//:[Next](@next)
