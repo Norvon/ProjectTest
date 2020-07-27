@@ -64,6 +64,39 @@ func isEvent<T: BinaryInteger>(_ i: T) -> Bool {
 // let int8isEven: (Int8) -> Bool = isEven
 
 // 函数的灵活性
+var myArray = [3, 1, 2]
+myArray.sorted()
+myArray.sorted(by: >)
+
+var numberStrings = [(2, "two"), (1, "one"), (3, "three")]
+numberStrings.sorted(by: <)
+
+let animals = ["elephant", "zebra", "dog"]
+print(animals.sorted { (lhs, rhs) -> Bool in
+    let l = lhs.reversed()
+    let r = rhs.reversed()
+    return l.lexicographicallyPrecedes(r)
+})
 
 
+@objcMembers
+final class Person: NSObject {
+    let first: String
+    let last: String
+    let yearOfBirth: Int
+    init(first: String, last: String, yearOfBirth: Int) {
+        self.first = first
+        self.last = last
+        self.yearOfBirth = yearOfBirth
+        // super.init() 在这里被隐式调用
+    }
+}
+let people = [
+    Person(first: "Emily", last: "Young", yearOfBirth: 2002),
+    Person(first: "David", last: "Gray", yearOfBirth: 1991),
+    Person(first: "Robert", last: "Barnes", yearOfBirth: 1985),
+    Person(first: "Ava", last: "Barnes", yearOfBirth: 2000),
+    Person(first: "Joanne", last: "Miller", yearOfBirth: 1994),
+    Person(first: "Ava", last: "Barnes", yearOfBirth: 1998),
+]
 //: [Next](@next)
