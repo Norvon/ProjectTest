@@ -372,7 +372,7 @@ let n = numbers3.compactMap{ Int($0) }.reduce(0, +)
 n
 
 extension Sequence {
-    func companctMap<B>(_ transform: (Element) -> B?) -> [B] {
+    func compactMap<B>(_ transform: (Element) -> B?) -> [B] {
         return lazy
             .map(transform)
             .filter{ $0 != nil}
@@ -422,8 +422,76 @@ dictWithNils
 dictWithNils["three"]? = nil // 不存在的 key，没有值会被更新或者插入
 dictWithNils
 
-// 可选值比较
+// 强制解包的时机
+// 当你确定你的某个值不可能是 nil 时可以使用❗️，当应当会希望如果它意外是 nil 的话，程序应当直接挂掉。
+// 每当你发现需要使用！时，可以火腿卡看是不是真的别无他法了。
 
+let ages = [
+    "Tim": 53, "Angela": 54, "Craig": 44,
+    "Jony": 47, "Chris": 37, "Michael": 34
+]
+
+print(ages.keys
+    .filter{ name in ages[name]! < 50 }
+    .sorted())
+
+print(ages.filter { (_, age) in age < 50 })
+print(ages.filter { (_, age) in age < 50 }
+    .map{ (name, _) in name }
+    .sorted())
+
+// 改进强制解包的错误信息
+infix operator !!
+func !!<T>(wrapped: T?, failureText: @autoclosure () -> String) -> T {
+    if let x = wrapped{ return x }
+    fatalError(failureText())
+}
+
+//let s = "foo"
+//let i = Int(s) !! "Expection integer, got\"\(s)\""
+
+infix operator !?
+func !?<T: ExpressibleByIntegerLiteral>
+    (wrapped: T?, failureText: @autoclosure () -> String) -> T {
+    assert(wrapped != nil, failureText())
+    return wrapped ?? 0
+}
+
+let s = "20"
+let i = Int(s) !? "Expection integer, got\"\(s)\""
+
+func !?<T: ExpressibleByArrayLiteral>
+    (wrapped: T?, failureText: @autoclosure () -> String) -> T {
+    assert(wrapped != nil, failureText())
+    return wrapped ?? []
+}
+
+func !?<T: ExpressibleByStringLiteral>
+    (wrapped: T?, failureText: @autoclosure () -> String) -> T {
+    assert(wrapped != nil, failureText())
+    return wrapped ?? ""
+}
+
+func !?<T>(wrapped: T?,
+           nilDefault: @autoclosure () -> (value: T, text: String)) -> T {
+    assert(wrapped != nil, nilDefault().text)
+    return wrapped ?? nilDefault().value
+}
+
+func !?(wrapped: ()?, failureText: @autoclosure() -> String) {
+    assert(wrapped != nil, failureText())
+}
+
+// var output: String? = nil
+// output?.write("something") !? "Wasn't expecting chained nil here"
+
+// 想要挂起一个操作我们有三种方式。
+// 首先，fatalError 将接受一条信息，并且无条件的停止操作
+// 第二种选择，使用 assert 来检查条件，当条件结果为 false 时，停止执行并输出信息。在发版时，assert会被移除掉，也就是说条件不会被检测，操作也永远不会挂起。
+// 第三种方式是使用 preconditiion, 它和 assert 有一样的接口，但是在发版中不会被移除，也就是说，只要条件被判定为 false，执行就会被停止。
+
+
+// 隐式解包可选值
 
 
 //:[Next](@next)
