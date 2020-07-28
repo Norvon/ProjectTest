@@ -157,6 +157,394 @@ temp = people.sorted { p0, p1 in
 temp
 
 // 函数作为数据
+typealias SortDescriptor<Root> = (Root, Root) -> Bool
+let sortByYear: SortDescriptor<Person> = { $0.yearOfBirth < $1.yearOfBirth }
+let sortByLastName: SortDescriptor<Person> = {
+    $0.last.localizedStandardCompare($1.last) == .orderedAscending
+}
 
+func sortDescriptor<Root, Value> (
+    key: @escaping (Root) -> Value,
+    by areInIncreasingOrder: @escaping (Value, Value) -> Bool)
+    -> SortDescriptor<Root> {
+        return { areInIncreasingOrder(key($0), key($1)) }
+}
+
+let sortByYearAlt: SortDescriptor<Person> = sortDescriptor(key: {$0.yearOfBirth}, by: <)
+people.sorted(by: sortByYearAlt)
+
+func sortDescriptor<Root, Value>(
+    key: @escaping (Root) -> Value,
+    ascending: Bool = true,
+    by comparator: @escaping (Value) -> (Value) -> ComparisonResult)
+    -> SortDescriptor<Root> {
+        return {
+            lhs, rhs in
+            let order: ComparisonResult = ascending
+            ? .orderedAscending
+            : .orderedDescending
+            return comparator(key(lhs))(key(rhs)) == order
+        }
+}
+
+let sortByFirstName: SortDescriptor<Person> = sortDescriptor(key: { $0.first }, by: String.localizedStandardCompare)
+people.sorted(by: sortByFirstName)
+
+func combine<Root>(sortesciptors: [SortDescriptor<Root>]) -> SortDescriptor<Root> {
+    return {
+        lhs, rhs in
+        for areInIncreasingOrder in sortesciptors {
+            if areInIncreasingOrder(lhs, rhs) { return true }
+            if areInIncreasingOrder(rhs, lhs) { return false }
+        }
+        return false
+    }
+}
+
+let combined: SortDescriptor<Person> = combine(sortesciptors: [sortByLastName, sortByFirstName, sortByYear])
+people.sorted(by: combined)
+
+
+// 合并两个排序函数
+infix operator <||>: LogicalDisjunctionPrecedence
+func <||><A>(lhs: @escaping (A, A) -> Bool,
+             rhs: @escaping (A, A) -> Bool)
+    -> (A, A) -> Bool {
+        return {x, y in
+            if lhs(x, y) { return true }
+            if lhs(y, x) { return false }
+            if rhs(x, y) { return true }
+            return false
+        }
+}
+
+// 从前往后判断
+let combinedAlt = sortByFirstName <||> sortByLastName <||> sortByYear
+people.sorted(by: combinedAlt)
+
+func lift<A>(_ compare: @escaping(A) -> (A) -> ComparisonResult)
+    -> (A?) -> (A?) -> ComparisonResult {
+        return {lhs in
+            { rhs in
+                switch (lhs, rhs) {
+                case (nil, nil): return .orderedSame
+                case (nil, _): return .orderedAscending
+                case (_, nil): return .orderedDescending
+                case let (l?, r?): return compare(l)(r)
+                }
+            }
+        }
+}
+
+let compare2 = lift(String.localizedStandardCompare)
+temp = files.sorted(by: sortDescriptor(key: {$0.fileExtension}, by: compare2))
+temp
+
+
+// 函数作为代理
+protocol AlertViewDelegate {
+     mutating func buttonTapped(atIndex: Int)
+}
+
+class AlertView {
+    var buttons: [String]
+//    weak var delegate: AlertViewDelegate?
+    var delegate: AlertViewDelegate?
+    
+    init(buttons: [String] = ["OK", "Cancel"]) {
+        self.buttons = buttons
+    }
+    
+    func fire() {
+        delegate?.buttonTapped(atIndex: 1)
+    }
+}
+
+class ViewController: AlertViewDelegate {
+    let alert: AlertView
+    
+    init() {
+        alert = AlertView()
+        alert.delegate = self
+    }
+    
+    func buttonTapped(atIndex index: Int) {
+        print("Button tapped: \(index)")
+    }
+}
+
+let vc = ViewController()
+vc.alert.fire()
+
+// 结构体上实现代理
+// 我们将 buttonTapped(atIndex:) 标记为 mutating。这样，结构体就可以在方法被调用时改变自身的内 容了:
+
+struct TapLogger: AlertViewDelegate {
+    var taps:[Int] = []
+    mutating func buttonTapped(atIndex index: Int) {
+        taps.append(index)
+    }
+}
+
+let alert = AlertView()
+var logger = TapLogger()
+alert.delegate = logger
+alert.fire()
+logger.taps
+// 当我们给 alert.delegate 赋值的时候，Swift 将结构体进行了复制。所以，更新的并不是我们期 望中的 logger.taps，而是 alert.delegate.taps。
+if let theLogger = alert.delegate as? TapLogger {
+    print(theLogger.taps)
+}
+
+// ⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️在代理和协议的模式中，并不适合使用结构体
+
+
+// 使用函数，而非代理
+class AlertView2 {
+    var buttons: [String]
+    var buttonTapped: ((_ buttonIndex: Int) -> ())?
+    
+    init(buttons:[String] = ["OK", "Cancel"]) {
+        self.buttons = buttons
+    }
+    
+    func fire() {
+        buttonTapped?(1)
+    }
+}
+
+struct TapLogger2 {
+    var taps:[Int] = []
+    mutating func logTap(index: Int) {
+        taps.append(index)
+    }
+}
+
+let alert2 = AlertView2()
+var logger2 = TapLogger2()
+
+// alert2.buttonTapped = logger2.logTap
+alert2.buttonTapped = { logger2.logTap(index: $0) }
+alert2.buttonTapped = { print("Button \($0) was tapped") }
+
+// inout 参数和可变方法
+// inout 做的事情是传值，然后复制回来，并不是传递引用。
+// 一个 inout 参数持有一个传递给函数的值，函数可以改变这个值，然后从函数中传出并替换掉原来的值。
+func increment(value: inout Int) {
+    value += 1
+}
+var i = 0
+increment(value: &i)
+increment(value: &i)
+increment(value: &i)
+increment(value: &i)
+
+var array = [0, 1, 2]
+increment(value: &array[0])
+array
+
+struct Point {
+    var x: Int
+    var y: Int
+}
+var point = Point(x: 0, y: 0)
+increment(value: &point.x)
+point.x
+
+// 如果一个属性是只读的（也就是说，只有 get 可用），我们将不能将其用于 inout 参数
+extension Point {
+    var squaredDistance: Int {
+        return x*x + y*y
+    }
+}
+
+// increment(value: &point.squaredDistance) // 错误
+
+postfix func ++(x: inout Int) {
+    x += 1
+}
+
+point.x++
+print(point)
+
+var dictionary = ["one": 1]
+dictionary["one"]?++
+dictionary["one"]
+
+// 嵌套函数和 inout
+func incrementTenTimes(value: inout Int) {
+    func inc() {
+        value += 1
+    }
+    for _ in 0..<10 {
+        inc()
+    }
+}
+
+var x = 0
+incrementTenTimes(value: &x)
+x
+
+//func escapeIncrement(value: inout int) -> () -> () {
+//    func inc() {
+//        value += 1
+//    }
+//    //  error: 嵌套函数不能捕获 inout 参数然后让其逃逸
+//    return inc
+//}
+
+// & 不意味 inout 的情况
+// 你应该小心 & 的另一种含义：把一个函数参数转换为一个不安全的指针
+func incref(pointer: UnsafeMutablePointer<Int>) -> () -> Int {
+    return {
+        pointer.pointee += 1
+        return pointer.pointee
+    }
+}
+
+let fun: () -> Int
+do {
+    var array = [0]
+    fun = incref(pointer: &array)
+}
+fun()
+
+// 属性
+
+// 外部只读，内部读写 private(set) 或者 fileprivate(set)
+import CoreLocation
+struct GPSTrack {
+    private(set) var record: [(CLLocation, Date)] = []
+    
+    var timesTampps: [Date] {
+        return record.map { $0.1 }
+    }
+}
+
+var gps = GPSTrack(record: [(CLLocation(), Date())])
+(1, "qe").1
+
+import UIKit
+// 变更观察者
+class SettingsController: UIViewController {
+    @IBOutlet weak var label: UILabel? {
+        didSet {
+            label?.textColor = .black
+        }
+    }
+}
+
+// willSet 和 didSet 本质上是一对 属性的简写:一个是存储值的私有存储属性;另一个是读取值的公开计算属性，这个计算属性 的 setter 会在将值存储到私有存储属性之前和/或之后，进行额外的工作。
+
+class Robot {
+    enum State {
+        case stopped, movingForward, turningRight, turningLeft
+    }
+    var state = State.stopped
+}
+
+class ObservableRobot: Robot {
+    override var state: Robot.State {
+        willSet {
+            print("Transitioning from \(state) to \(newValue)")
+        }
+    }
+}
+var robot = ObservableRobot()
+robot.state = .movingForward
+
+// 延迟存储属性
+class GPSTrackViewController: UIViewController {
+    var track: GPSTrack = GPSTrack()
+    
+    lazy var preview: UIImage = {
+        for point in track.record {
+            
+        }
+        return UIImage()
+    }()
+}
+
+// 和计算属性不同，存储属性和需要存储的延迟属性不能被定义在扩展中。
+struct Point2 {
+    var x: Double
+    var y: Double
+    private(set) lazy var distanceFromOrigin: Double = (x * x + y * y).squareRoot()
+    
+    init(x: Double, y: Double) {
+        self.x = x
+        self.y = y
+    }
+}
+
+var point2 = Point2(x: 3, y: 4)
+point2.distanceFromOrigin
+point2.x += 10
+point2.distanceFromOrigin // 不会发生改变
+
+let immutablePoint = Point2(x: 3, y: 4)
+// immutablePoint.distanceFromOrigin // 不能在一个不可变量上使用可变 getter
+// lazy 关键字不会进行任何线程同步，如果在一个延迟属性完成计算之前，多个线程同时尝试访问它的话，计算有可能进行多次，计算过程中的各种副作用也会发生多次。
+
+// 下标
+let fibs = [0, 1, 1, 2, 3, 5]
+let first = fibs[0]
+fibs[1..<3]
+
+// 自定义下标操作
+extension Collection {
+    subscript(indices indexList:Index...) -> [Element] {
+        var result: [Element] = []
+        for index in indexList {
+            result.append(self[index])
+        }
+        return result
+    }
+}
+// ... 三个点表示 indexList 是一个可变长度参数
+Array("abcdefghijklmnopqrstuvwxyz")[indices:1, 3, 4]
+//indices: 7, 4, 11, 11, 14
+
+// 下标进阶
+var japan: [String: Any] = [
+    "name": "Japan",
+    "capital": "Tokyo",
+    "population": 126_740_000,
+    "coordinates": [
+        "latitude": 35.0,
+        "longitude": 139.0
+    ]
+]
+
+// 错误 类型 'Any' 没有下标成员
+// japan["coordinate"]?["latitude"] = 36
+japan
+
+// 错误 不能对不可变表达式赋值
+// (japan["coordinates"] as? [String: Double])?["coordinate"] = 36
+
+extension Dictionary {
+    subscript<Result>(key: Key, as type: Result.Type) -> Result? {
+        get {
+            return self[key] as? Result
+        }
+        set {
+            guard let value = newValue else {
+                self[key] = nil
+                return
+            }
+            
+            guard let value2 = value as? Value else {
+                return
+            }
+            self[key] = value2
+        }
+    }
+}
+
+japan["coordinates", as: [String: Double].self]?["latitude"] = 36
+japan["coordinates"]
+
+// 键路径
 
 //: [Next](@next)
