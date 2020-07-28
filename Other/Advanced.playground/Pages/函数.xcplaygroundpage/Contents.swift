@@ -562,6 +562,18 @@ print(streetKeyPath)
 let nameKeyPath = \SPerson.name
 print(nameKeyPath)
 
-
 "Hello"[keyPath:\.count]
+
+let simpsonResidence = SAddress(street: "1094 Evergreen Terrace", city: "Springfield", zipCode: 97475)
+var lisa = SPerson(name: "Lisa Simpson", address: simpsonResidence)
+lisa[keyPath: nameKeyPath]
+lisa[keyPath: streetKeyPath] = "742 Evergreen Terrace"
+//lisa[keyPath: nameKeyPath] = "12" // 因为name 定义的是不可变类型
+
+var bart = SPerson(name: "Bart Simpson", address: simpsonResidence)
+let Speople = [lisa, bart]
+Speople[keyPath: \.[1].name]
+
+// 可以通过函数建模的键路径
+
 //: [Next](@next)
