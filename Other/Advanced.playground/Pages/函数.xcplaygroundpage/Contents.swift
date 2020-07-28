@@ -575,5 +575,17 @@ let Speople = [lisa, bart]
 Speople[keyPath: \.[1].name]
 
 // 可以通过函数建模的键路径
+// KeyPath<Person, String> + KeyPath<String, Int> = KeyPath<Person, Int>
+
+let nameCountKeyPath = nameKeyPath.appending(path: \.count)
+
+func sortDescriptor2<Root, Value>(key: @escaping (Root) -> Value)
+    -> SortDescriptor<Root> where Value: Comparable {
+        return { key($0) < key($1) }
+}
+
+let streetSD: SortDescriptor<SPerson> = sortDescriptor2 {
+    $0.address.street
+}
 
 //: [Next](@next)
