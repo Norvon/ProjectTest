@@ -546,5 +546,22 @@ japan["coordinates", as: [String: Double].self]?["latitude"] = 36
 japan["coordinates"]
 
 // 键路径
+struct SAddress {
+    var street: String
+    var city: String
+    var zipCode: Int
+}
 
+struct SPerson {
+    let name: String
+    var address: SAddress
+}
+
+let streetKeyPath = \SPerson.address.street
+print(streetKeyPath)
+let nameKeyPath = \SPerson.name
+print(nameKeyPath)
+
+
+"Hello"[keyPath:\.count]
 //: [Next](@next)
