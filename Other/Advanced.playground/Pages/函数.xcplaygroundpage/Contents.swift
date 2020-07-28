@@ -99,4 +99,64 @@ let people = [
     Person(first: "Joanne", last: "Miller", yearOfBirth: 1994),
     Person(first: "Ava", last: "Barnes", yearOfBirth: 1998),
 ]
+
+// 姓
+let lastDescriptor = NSSortDescriptor(key: #keyPath(Person.last),
+                                      ascending: true,
+                                      selector: #selector(NSString.localizedStandardCompare(_:)))
+
+// 名
+let firstDescriptor = NSSortDescriptor(key: #keyPath(Person.first),
+                                       ascending: true,
+                                       selector: #selector(NSString.localizedStandardCompare(_:)))
+
+// 出生年份
+let yearDescriptor = NSSortDescriptor(key: #keyPath(Person.yearOfBirth),
+                                      ascending: true)
+
+let descriptors = [lastDescriptor, firstDescriptor, yearDescriptor]
+(people as NSArray).sortedArray(using: descriptors)
+
+var strings = ["Hello", "hallo", "Hallo", "hello"]
+strings.sort {
+    $0.localizedStandardCompare($1) == .orderedAscending
+}
+strings
+
+people.sorted { $0.yearOfBirth < $1.yearOfBirth }
+
+extension String {
+    var fileExtension: String? {
+        let period: String.Index
+        if let idx = lastIndex(of: ".") {
+            period = idx
+        } else {
+            return nil
+        }
+        let extensionStart = index(after: period)
+        return String(self[extensionStart...])
+    }
+}
+
+var files = ["one", "file.h", "file.c", "test.h"]
+files.sort {
+    l, r in r.fileExtension.flatMap {
+        l.fileExtension?.localizedStandardCompare($0)
+        } == .orderedAscending
+}
+files
+people
+var temp: Any? = nil
+temp = people.sorted { p0, p1 in
+    let left = [p0.last, p0.first]
+    let right = [p1.last, p1.first]
+    return left.lexicographicallyPrecedes(right) {
+        $0.localizedStandardCompare($1) == .orderedAscending
+    }
+}
+temp
+
+// 函数作为数据
+
+
 //: [Next](@next)
