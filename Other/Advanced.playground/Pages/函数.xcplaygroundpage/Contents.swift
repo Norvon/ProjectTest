@@ -588,4 +588,148 @@ let streetSD: SortDescriptor<SPerson> = sortDescriptor2 {
     $0.address.street
 }
 
+func sortDescriptor3<Root, Value>(key: KeyPath<Root,Value>)
+    -> SortDescriptor<Root> where Value: Comparable {
+        return { $0[keyPath: key] < $1[keyPath: key] }
+}
+
+let streetSDKeyPath: SortDescriptor<SPerson> = sortDescriptor3(key: \.address.street)
+
+// 可写键路径
+do {
+    let streetKeyPath = \SPerson.address.street
+    let getStreet: (SPerson) -> String = {
+        person in
+        return person.address.street
+    }
+    let setStreet: (inout SPerson, String) -> () = {
+        person, newValue in
+        person.address.street = newValue
+    }
+    lisa[keyPath: streetKeyPath] = "1234Evergreen terrace"
+    setStreet(&lisa, "1234 Evergreen Terrace" )
+    
+    
+}
+
+extension NSObjectProtocol where Self: NSObject {
+    func observe<A, Other>(_ keyPath: KeyPath<Self, A>,
+                           writeTo other: Other,
+                           _ otherKeyPath: ReferenceWritableKeyPath<Other, A>)
+        -> NSKeyValueObservation
+        where A: Equatable, Other: NSObjectProtocol {
+            return observe(keyPath, options: .new) { _, change in
+                guard let newValue = change.newValue,
+                    other[keyPath: otherKeyPath] != newValue else {
+                        return
+                }
+                other[keyPath: otherKeyPath] = newValue
+            }
+    }
+    
+    func bind<A, Other>(_ keyPath: ReferenceWritableKeyPath<Self, A>,
+                        to other: Other,
+                        _ otherKeyPath: ReferenceWritableKeyPath<Other, A>)
+        -> (NSKeyValueObservation, NSKeyValueObservation)
+        where A: Equatable, Other: NSObject {
+            let one = observe(keyPath, writeTo: other, otherKeyPath)
+            let two = other.observe(otherKeyPath, writeTo: self, keyPath)
+            return (one, two)
+    }
+}
+
+do {
+    final class Person: NSObject {
+        @objc dynamic var name: String = ""
+    }
+    
+    class TextFieeld: NSObject {
+        @objc dynamic var text: String = ""
+    }
+    
+    let person = Person()
+    let textField = TextFieeld()
+    let observatiion = person.bind(\.name, to: textField, \.text)
+    person.name = "John"
+    print("textField.text = \(textField.text)")
+    
+    textField.text = "Sarah"
+    print("person.name =  \(person.name)")
+}
+
+// 键路径层级
+
+// AnyKeyPath 和（Any）-> Any? 类型的函数相似。
+// PartialKeyPath<Source> 和 (Source) -> Any? 函数相似。
+// KeyPath<Source, Target> 和 (Source) -> Target 函数相似。
+// WritableKeyPath<Source, Target> 和 (Source) -> Target 与 (inout Source, Target) -> () 这一对函数相似。
+// ReferenceWritableKeyPath<Source, Target> 和 (Source) -> Target 与 (Source, Target) -> () 这一对函数相似。第二个函数可以用 Target 来更新 Source 的值，且要求 Source 是一个引用类型。 对 WritableKeyPath 和 ReferenceWritableKeyPath 进行区分是必要的， 前一个类型的 setter 要求它的参数是 inout 的。
+
+// 自动闭包
+func and (_ l: Bool, _ r: () -> Bool) -> Bool {
+    guard l else { return false }
+    return r()
+}
+
+let events = [1, 2, 3]
+if and(!events.isEmpty, { events[0] > 10 }) {
+    print("大于10")
+}
+
+func and(_ l: Bool, _ r: @autoclosure () -> Bool) -> Bool {
+    guard l else { return false }
+    return r()
+}
+
+if and(!events.isEmpty, events[0] < 10) {
+    print("不存在或者小于10")
+}
+
+func log(ifFalse condition: Bool,
+         message: @autoclosure () -> (String),
+         file: String = #file,
+         function: String = #function,
+         line: Int = #line) {
+    guard !condition else { return }
+    print("Assertion faile: \(message()),\(file):\(function)(line \(line)")
+}
+
+// @escaping 标注
+func getSumOf(array: [Int], handler: ((Int) -> Void)) {
+    var sum: Int = 0
+    for value in array {
+        sum += value
+    }
+    handler(sum)
+}
+
+// @nonescaping 闭包的生命周期
+// 1. 在函数调用期间将闭包作为函数参数传递
+// 2. 对功能进行一些其它工作
+// 3. 函数运行闭包
+// 4. 函数返回编译器
+// ⚠️ 步骤4执行后，闭包将在内存中不存在
+
+//func getSumOf(array: [Int], handler: ((Int) -> Void)) {
+//    // 步骤 2
+//    var sum: Int = 0
+//    for value in array {
+//        sum += value
+//    }
+//
+//    // 步骤 3
+//    handler(sum)
+//}
+//
+//func doSomething() {
+//    // 步骤 1
+//    self.getSumOf(array: [16,756,442,6,23]) { [weak self](sum) in
+//        // 步骤 4
+//        print(sum)
+//    }
+//}
+
+// @escaping 闭包的生命周期
+
+
 //: [Next](@next)
