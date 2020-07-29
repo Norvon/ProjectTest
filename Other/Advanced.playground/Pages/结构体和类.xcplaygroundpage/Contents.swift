@@ -74,13 +74,23 @@ struct HTTPRequest {
 }
 
 extension HTTPRequest {
+
+    private var storageForWriting: HTTPRequest.Storage {
+        mutating get {
+            if !isKnownUniquelyReferenced(&storage) {
+                self.storage = storage.copy()
+            }
+            return storage
+        }
+    }
+
     var path: String {
         get {
             return storage.path
         }
         set {
-            storage = storage.copy()
-            storage.path = newValue
+//            storage = storage.copy()
+            storageForWriting.path = newValue
         }
     }
     
@@ -89,7 +99,7 @@ extension HTTPRequest {
             return storage.headers
         }
         set {
-            storage = storage.copy()
+//            storage = storage.copy()
             storage.headers = newValue
         }
     }
@@ -118,15 +128,14 @@ for x in 0..<5 {
 // unowned 引用和弱引用并不被计算在内。即使我们不能把此类变量作为参数传入这个函数，否则函数总是会返回 false
 // 不能作用于 Objective-C, 解决（可以把 Objective-C 类的实例封装在一个 Swift 类中）。
 
-//extension HTTPRequest {
-//    private var storageForWriting: HTTPRequest.Storage {
-//        mutating get {
-//            if !isKnownUniquelyReferenced(&storage) {
-//                self.storage = storage.copy()
-//            }
-//            return storage
-//        }
-//    }
-//}
+do {
+    var req = HTTPRequest(path: "/home", headers: [:])
+    var copy = req
+    for x in 0..<5 {
+        req.headers["X-RequestId"] = "\(x)"
+    }
+}
+
+
 
 //: [Next](@next)
