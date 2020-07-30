@@ -35,9 +35,28 @@ let flag = flagLetterC + flagLetterN
 
 extension String {
     var allPrefixes1: [Substring] {
-        return (0...count).map(prefix)
+        return (0...count).map { (i) -> Substring in
+//            print(self)
+            return self.prefix(i)
+        }
+//        (prefix)
     }
 }
 let hello = "Hello"
 hello.allPrefixes1
+
+extension String {
+    var allPrefixes2: [Substring] {
+        return [""] + indices.map { index -> Substring in
+            print(type(of: self))
+            return self[...index]
+        }
+    }
+}
+
+hello.allPrefixes2
+
+// 范围可替换，而非可变
+
+
 //: [Next](@next)
