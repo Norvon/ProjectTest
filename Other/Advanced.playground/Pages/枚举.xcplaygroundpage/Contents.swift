@@ -260,6 +260,96 @@ stack.pop()
 pList(stack)
 
 // 原始值
+enum HTTPStatus: Int {
+    case ok = 200
+    case created = 201
+    case movedPermanently = 301
+    case notFound = 404
+}
 
+//protocol RawRepresentable {
+//    associatedtype RawValue
+//    init?(rawValue: RawValue)
+//    var rawValue: RawValue{ get }
+//}
+//
+//HTTPStatus.init(rawValue:)
+//HTTPStatus(rawValue: 404)
+//HTTPStatus(rawValue: 1000)
+//HTTPStatus.created.rawValue
+
+// 手动实现 RawRepresentable
+enum AnchorPoint {
+    case center
+    case topLeft
+    case topRight
+    case bottomLeft
+    case bottomRight
+}
+
+extension AnchorPoint: RawRepresentable {
+    typealias RawValue = (x: Int, y: Int)
+    
+    var rawValue: (x: Int, y: Int) {
+        switch self {
+        case .center: return (0, 0)
+        case .topLeft: return (-1, 1)
+        case .topRight: return (1, 1)
+        case .bottomLeft: return (-1, -1)
+        case .bottomRight: return (1, -1)
+        }
+    }
+    
+    init?(rawValue: (x: Int, y: Int)) {
+        switch rawValue {
+        case (0, 0): self = .center
+        case (-1, 1): self = .topLeft
+        case (1, 1): self = .topRight
+        case (-1, -1): self = .bottomLeft
+        case (1, -1): self = .bottomRight
+        default: return nil
+        }
+    }
+}
+
+AnchorPoint.topRight.rawValue
+AnchorPoint(rawValue: (x: 0, y: 0))
+AnchorPoint(rawValue: (x: 2, y: 1))
+
+enum Menultem: String, CaseIterable {
+    case undo = "Undo"
+    case cut = "Cut"
+    case coopy = "Copy"
+    case paste = "Paste"
+}
+
+// 计算 size
+MemoryLayout<Menultem>.size
+MemoryLayout<Message>.size
+
+Menultem.allCases
+Menultem.allCases.count
+Menultem.allCases.map { print($0.rawValue)}
+
+
+// 手动实现 Caselterable
+extension Bool: CaseIterable {
+    public static var allCases: [Bool] {
+        return [false, true]
+    }
+}
+
+Bool.allCases
+
+extension UInt8: CaseIterable {
+    public static var allCases: ClosedRange<UInt8> {
+        return .min ... .max
+    }
+}
+
+UInt8.allCases.count
+UInt8.allCases.prefix(3) + UInt8.allCases.suffix(3)
+
+// 固定和非固定枚举
 
 //: [Next](@next)
