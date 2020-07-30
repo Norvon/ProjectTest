@@ -351,5 +351,30 @@ UInt8.allCases.count
 UInt8.allCases.prefix(3) + UInt8.allCases.suffix(3)
 
 // 固定和非固定枚举
+// @frozen
+
+// 尽量避免使用嵌套 switch 语句, 用元组匹配
+// 利用明确初始化检查
+// 避免用 none 或 some 来命名成员
+// 对那些用保留的关键字来命名的成员使用反引号
+// 可以像工厂方法一样使用成员
+// 不要使用关联值来模拟存储属性，请该用结构体
+// 不要过度使用关联值组件
+// 把空枚举作为命名空间
+enum Strategy {
+    case custom
+    case `default`
+}
+var strategy = Strategy.default
+
+enum Strategy2 {
+    case custom
+    case `default`
+}
+
+// strategy = Strategy2.default
+
+
 
 //: [Next](@next)
+ 
