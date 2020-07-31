@@ -53,12 +53,9 @@ struct Resource<A> {
     let parse: (Data) throws -> A
 }
 
-extension URLSession {
-    func load<A>(_ r: Resource<A>,
-                 callback:@escaping (Ressult<A, Error>) -> ()) {
-        dataTask(with: r)
-    }
-}
+// 1. 确定一个人物的公共执行模式
+// 2. 把执行这个任务的代码模版抽象成一个泛型方法。
+// 3. 允许方法的调用者通过泛型参数和汗水参数，在每次调用时泛型方法时，注入需要自定义的内容
 
 
 //: [Next](@next)

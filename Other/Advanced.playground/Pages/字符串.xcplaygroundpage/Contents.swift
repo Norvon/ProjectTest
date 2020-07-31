@@ -259,4 +259,43 @@ let numbers1 = [1, 2, 3, 4, 5]
 print(numbers1, to: &s1)
 s1
 
+struct ArrayStream: TextOutputStream {
+    var buffer: [String] = []
+    mutating func write(_ string: String) {
+        buffer.append(string)
+    }
+}
+
+var stream = ArrayStream()
+print("Hello", to: &stream)
+print("World", to: &stream)
+stream.buffer
+
+struct ReplacingStream: TextOutputStream, TextOutputStreamable {
+    let toReplace: KeyValuePairs<String, String>
+    private var output = ""
+
+    init(replacing toReplace: KeyValuePairs<String, String>) {
+        self.toReplace = toReplace
+    }
+
+    mutating func write(_ string: String) {
+        let toWrite = toReplace.reduce(string) { partialResult, pair in
+            partialResult.replacingOccurrences(of: pair.key, with: pair.value)
+        }
+        print(toWrite, terminator: "", to: &output)
+    }
+
+    func write<Target>(to target: inout Target) where Target : TextOutputStream {
+        output.write(to: &target)
+    }
+}
+
+var replacer = ReplacingStream(replacing: ["in the cloud": "on someone else's computer"])
+let souce = "People find it convenient to store their data in the cloud."
+print(souce, terminator: "", to: &replacer)
+
+var output = ""
+print(replacer, terminator: "", to: &output)
+output
 //: [Next](@next)

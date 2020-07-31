@@ -7,7 +7,5 @@
         <page name='函数'/>
         <page name='结构体和类'/>
         <page name='枚举'/>
-        <page name='字符串'/>
-        <page name='泛型'/>
     </pages>
 </playground>
