@@ -43,6 +43,8 @@ do {
     print(error.localizedDescription)
 }
 
-
-
+// 容器
+// 键容器 (Keyed Container) 用于编码键值对。
+// 无键容器 (Unkeyed Container) 用于编码一系列值，但不需要对应的键，可以将它想像成保存编码结果的数组。
+// 单值容器对单一值进行编码。
 //: [Next](@next)
