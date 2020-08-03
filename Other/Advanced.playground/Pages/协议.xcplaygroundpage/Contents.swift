@@ -74,4 +74,32 @@ extension CGContext: DrawingContext {
 // 协议组合
 typealias Codable = Decodable & Encodable
 
+// 协议和关联类型
+protocol IteratorProtocol {
+    associatedtype Element
+    mutating func next() -> Element?
+}
+
+protocol ViewController {}
+protocol Restorable {
+    associatedtype State: Codable
+    var state: State { get set }
+}
+
+class MessagesVC: ViewController, Restorable {
+    typealias State = MessagesState
+    
+    struct MessagesState: Codable {
+        var messages: [String] = []
+        var scrollPosition: CGFloat = 0
+    }
+    var state: MessagesState = MessagesState()
+}
+
+// 类型消除器
+let seq = [1, 2, 3].lazy.filter { $0 > 1 }.map { $0  * 2 }
+let anySeq = AnySequence(seq)
+
+// 
+
 //: [Next](@next)
