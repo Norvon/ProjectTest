@@ -11,5 +11,6 @@
         <page name='泛型'/>
         <page name='协议'/>
         <page name='集合类型协议'/>
+        <page name='错误处理'/>
     </pages>
 </playground>
