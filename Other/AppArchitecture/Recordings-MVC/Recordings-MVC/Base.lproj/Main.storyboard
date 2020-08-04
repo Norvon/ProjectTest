@@ -25,9 +25,9 @@
             <objects>
                 <navigationController id="Lrf-gg-CSl" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="lVh-gG-hRM">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="barTintColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
                     <connections>
                         <segue destination="7pt-c8-A19" kind="relationship" relationship="rootViewController" id="7iy-Mx-1ra"/>
@@ -40,19 +40,48 @@
         <!--Recordings-->
         <scene sceneID="xBa-Em-nDM">
             <objects>
-                <tableViewController id="7pt-c8-A19" sceneMemberID="viewController">
+                <tableViewController id="7pt-c8-A19" customClass="FolderViewController" customModule="Recordings_MVC" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="azS-BP-vpk">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="VKb-Li-kc3">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="RecordingCell" textLabel="NzK-OG-g0b" style="IBUITableViewCellStyleDefault" id="VKb-Li-kc3">
                                 <rect key="frame" x="0.0" y="28" width="320" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="VKb-Li-kc3" id="vdg-6Z-A01">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Recording" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="NzK-OG-g0b">
+                                            <rect key="frame" x="16" y="0.0" width="288" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                 </tableViewCellContentView>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="FolderCell" textLabel="klR-wO-6sC" style="IBUITableViewCellStyleDefault" id="6Zx-rP-m5Y">
+                                <rect key="frame" x="0.0" y="71.5" width="320" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="6Zx-rP-m5Y" id="PCl-gn-J2a">
+                                    <rect key="frame" x="0.0" y="0.0" width="293" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Folder" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="klR-wO-6sC">
+                                            <rect key="frame" x="16" y="0.0" width="269" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="7pt-c8-A19" kind="show" identifier="showFolder" id="4ag-oA-wZO"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -60,7 +89,23 @@
                             <outlet property="delegate" destination="7pt-c8-A19" id="VSW-aI-LsA"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Recordings" id="iQz-Tr-WaX"/>
+                    <navigationItem key="navigationItem" title="Recordings" id="iQz-Tr-WaX">
+                        <rightBarButtonItems>
+                            <barButtonItem style="plain" systemItem="add" id="RDq-rL-Qhu">
+                                <connections>
+                                    <action selector="createNewRecording:" destination="7pt-c8-A19" id="FAS-7a-51B"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="files" style="plain" id="rqg-P5-YSm">
+                                <connections>
+                                    <action selector="createNewFolder:" destination="7pt-c8-A19" id="xi5-jM-1OQ"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                    </navigationItem>
+                    <connections>
+                        <segue destination="xmS-Mm-QMq" kind="presentation" identifier="showRecorder" modalPresentationStyle="formSheet" modalTransitionStyle="crossDissolve" id="oTw-JL-rbj"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hM8-jE-FWU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -71,7 +116,7 @@
             <objects>
                 <navigationController id="R6U-JQ-MUF" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="nru-zn-S0f">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -97,6 +142,22 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FN9-CZ-sOj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1523" y="485"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="JUc-ll-hNI">
+            <objects>
+                <viewController id="xmS-Mm-QMq" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="xrN-oL-uDv">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="lLg-ek-8lU"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="pIA-5y-3c3"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cto-CO-1JK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-799" y="-381"/>
         </scene>
     </scenes>
 </document>

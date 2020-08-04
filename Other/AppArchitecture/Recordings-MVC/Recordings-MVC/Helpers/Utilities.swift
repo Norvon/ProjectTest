@@ -36,7 +36,7 @@ extension UIViewController {
         alert.addAction(UIAlertAction(title: accept, style: .default) { _ in
             callback(alert.textFields?.first?.text)
         })
-        
+        present(alert, animated: true)
     }
 }
 
