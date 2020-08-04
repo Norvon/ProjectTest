@@ -28,14 +28,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
                              collapseSecondary secondaryViewController: UIViewController,
                              onto primaryViewController: UIViewController)
         -> Bool {
-            guard let topAsDetailController = (secondaryViewController as? UINavigationController)?.topViewController as? PlayViewController else { return false}
-            topAsDetailController
-            //TODO: 待处理
+            guard let topAsDetailController = (secondaryViewController as? UINavigationController)?.topViewController as? PlayViewController else {
+                return false
+            }
             // 待处理
-//            if topAsDetailController.recording == nil {
-//                return true
-//            }
+            if topAsDetailController.recording == nil {
+                return true
+            }
             return false
+    }
+
+    func application(_ application: UIApplication, shouldSaveApplicationState coder: NSCoder) -> Bool {
+        return true
+    }
+
+    func application(_ application: UIApplication, shouldRestoreApplicationState coder: NSCoder) -> Bool {
+        return true
     }
 }
 

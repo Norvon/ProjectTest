@@ -10,7 +10,13 @@ import UIKit
 
 class PlayViewController: UIViewController {
 
-    
+
+    var recording: Recording? {
+        didSet {
+//            updateForChangedRecording()
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
