@@ -96,8 +96,8 @@ class FolderViewController: UITableViewController {
             folderVC.folder = selectedFolder
         }
         else if identifier == .showRecorder {
-//            guard let recordVC = segue.destination as? RecordViewController else { fatalError() }
-//            recordVC.folder = folder
+            guard let recordVC = segue.destination as? RecordViewController else { fatalError() }
+            recordVC.folder = folder
         } else if identifier == .showPlayer {
 //            guard
 //            let playVC = (segue.destination as? UINavigationController)?.topViewController as? PlayViewController,

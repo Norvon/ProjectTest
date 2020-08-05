@@ -18,9 +18,8 @@ private let formatter: DateComponentsFormatter = {
 }()
 
 func timeString(_ time: TimeInterval) -> String {
-    return formatter.string(for: time)!
+    return formatter.string(from: time)!
 }
-
 
 extension UIViewController {
     func modalTextAlert(title: String,

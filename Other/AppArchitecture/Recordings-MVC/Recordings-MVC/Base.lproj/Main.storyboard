@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Dnv-XX-SZK">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Dnv-XX-SZK">
     <device id="retina3_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -62,6 +61,9 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="R6U-JQ-MUF" kind="showDetail" identifier="showPlayer" id="bbK-uT-HPS"/>
+                                </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="FolderCell" textLabel="klR-wO-6sC" style="IBUITableViewCellStyleDefault" id="6Zx-rP-m5Y">
                                 <rect key="frame" x="0.0" y="71.5" width="320" height="43.5"/>
@@ -91,12 +93,12 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Recordings" id="iQz-Tr-WaX">
                         <rightBarButtonItems>
-                            <barButtonItem style="plain" systemItem="add" id="RDq-rL-Qhu">
+                            <barButtonItem systemItem="add" id="RDq-rL-Qhu">
                                 <connections>
                                     <action selector="createNewRecording:" destination="7pt-c8-A19" id="FAS-7a-51B"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem title="files" style="plain" id="rqg-P5-YSm">
+                            <barButtonItem systemItem="organize" id="rqg-P5-YSm">
                                 <connections>
                                     <action selector="createNewFolder:" destination="7pt-c8-A19" id="xi5-jM-1OQ"/>
                                 </connections>
@@ -109,12 +111,13 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hM8-jE-FWU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1838" y="-381"/>
+            <point key="canvasLocation" x="-1629" y="-381"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="6hW-fH-U4J">
             <objects>
                 <navigationController id="R6U-JQ-MUF" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="Tef-GS-aSZ"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="nru-zn-S0f">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -131,11 +134,14 @@
         <scene sceneID="of5-m6-acg">
             <objects>
                 <viewController id="ABr-0I-t1n" customClass="PlayViewController" customModule="Recordings_MVC" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="LXU-5A-bL5"/>
+                        <viewControllerLayoutGuide type="bottom" id="NoA-Sf-8LF"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="ZUl-P1-3K2">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="6P7-sF-fd7"/>
                     </view>
                     <navigationItem key="navigationItem" title="Detail" id="bCJ-iE-SkW"/>
                 </viewController>
@@ -143,21 +149,67 @@
             </objects>
             <point key="canvasLocation" x="-1523" y="485"/>
         </scene>
-        <!--View Controller-->
+        <!--Record View Controller-->
         <scene sceneID="JUc-ll-hNI">
             <objects>
-                <viewController id="xmS-Mm-QMq" sceneMemberID="viewController">
+                <viewController id="xmS-Mm-QMq" customClass="RecordViewController" customModule="Recordings_MVC" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="9EW-gA-mfK"/>
+                        <viewControllerLayoutGuide type="bottom" id="mxk-Yd-cmL"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="xrN-oL-uDv">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="a1t-4v-SZm">
+                                <rect key="frame" x="0.0" y="186.5" width="320" height="87"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recording" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="STE-hy-XnJ">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="20.5"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HmX-9e-HZM">
+                                        <rect key="frame" x="0.0" y="20.5" width="320" height="33.5"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1kc-n9-gva">
+                                        <rect key="frame" x="0.0" y="54" width="320" height="33"/>
+                                        <color key="backgroundColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                        <state key="normal" title="Stop">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="stop:" destination="xmS-Mm-QMq" eventType="touchUpInside" id="iER-Mg-dsm"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="lLg-ek-8lU"/>
+                        <constraints>
+                            <constraint firstItem="a1t-4v-SZm" firstAttribute="leading" secondItem="xrN-oL-uDv" secondAttribute="leading" id="2vb-oF-iJu"/>
+                            <constraint firstAttribute="trailing" secondItem="a1t-4v-SZm" secondAttribute="trailing" id="HIl-Pv-Ecz"/>
+                            <constraint firstItem="a1t-4v-SZm" firstAttribute="centerY" secondItem="xrN-oL-uDv" secondAttribute="centerY" id="IVW-Z0-69a"/>
+                            <constraint firstItem="a1t-4v-SZm" firstAttribute="centerX" secondItem="xrN-oL-uDv" secondAttribute="centerX" id="Ucy-0u-mL8"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="pIA-5y-3c3"/>
+                    <connections>
+                        <outlet property="stopoButton" destination="1kc-n9-gva" id="tPd-hT-SZg"/>
+                        <outlet property="timeLabel" destination="HmX-9e-HZM" id="Cb9-l7-cku"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cto-CO-1JK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-799" y="-381"/>
+            <point key="canvasLocation" x="-233" y="-381"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="bbK-uT-HPS"/>
+    </inferredMetricsTieBreakers>
 </document>
