@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 
+
+/// formatter
 private let formatter: DateComponentsFormatter = {
     let formatter = DateComponentsFormatter()
     formatter.unitsStyle = .positional
@@ -17,11 +19,23 @@ private let formatter: DateComponentsFormatter = {
     return formatter
 }()
 
+
+/// 转换 TimeInterval 为 String
+/// - Parameter time: time TimeInterval
+/// - Returns: TimeInterval String
 func timeString(_ time: TimeInterval) -> String {
     return formatter.string(from: time)!
 }
 
 extension UIViewController {
+    
+    /// 弹窗
+    /// - Parameters:
+    ///   - title: 标题
+    ///   - accept: 确认 默认 OK
+    ///   - cancel: 取消  默认 Cancel
+    ///   - placeholder: 输入框默认提示文案
+    ///   - callback: callback
     func modalTextAlert(title: String,
                         accept: String = .ok,
                         cancel: String = .cancel,

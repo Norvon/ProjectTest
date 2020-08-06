@@ -24,15 +24,15 @@ class RecordViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
+        super.viewDidAppear(animated)
         
         audioRecorder = folder?.store?.fileURL(for: recording).flatMap {
             url in
-            Recorder(url: url) { (time) in
+            Recorder(url: url) {[weak self] (time) in
                 if let t = time {
-                    self.timeLabel.text = timeString(t)
+                    self?.timeLabel.text = timeString(t)
                 } else {
-                    self.dismiss(animated: true)
+                    self?.dismiss(animated: true)
                 }
             }
         }
