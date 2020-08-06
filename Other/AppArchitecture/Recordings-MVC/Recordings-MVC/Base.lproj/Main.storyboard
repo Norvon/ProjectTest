@@ -24,7 +24,7 @@
             <objects>
                 <navigationController id="Lrf-gg-CSl" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="lVh-gG-hRM">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
@@ -119,7 +119,7 @@
                 <navigationController id="R6U-JQ-MUF" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="Tef-GS-aSZ"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="nru-zn-S0f">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -130,10 +130,10 @@
             </objects>
             <point key="canvasLocation" x="-2513" y="485"/>
         </scene>
-        <!--Detail-->
+        <!--Player-->
         <scene sceneID="of5-m6-acg">
             <objects>
-                <viewController id="ABr-0I-t1n" customClass="PlayViewController" customModule="Recordings_MVC" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController restorationIdentifier="playerController" storyboardIdentifier="playerController" title="Player" id="ABr-0I-t1n" customClass="PlayViewController" customModule="Recordings_MVC" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="LXU-5A-bL5"/>
                         <viewControllerLayoutGuide type="bottom" id="NoA-Sf-8LF"/>
@@ -143,7 +143,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="dby-D8-Rmx">
-                                <rect key="frame" x="16" y="64" width="288" height="122.5"/>
+                                <rect key="frame" x="16" y="64" width="288" height="160.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No recording selected." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hp5-qn-EZy">
                                         <rect key="frame" x="0.0" y="0.0" width="288" height="19"/>
@@ -151,8 +151,8 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="j8M-Q9-2uM">
-                                        <rect key="frame" x="0.0" y="19" width="288" height="103.5"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="j8M-Q9-2uM">
+                                        <rect key="frame" x="0.0" y="19" width="288" height="141.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="oXb-gc-RLW">
                                                 <rect key="frame" x="0.0" y="0.0" width="288" height="34"/>
@@ -167,11 +167,14 @@
                                                         <rect key="frame" x="52.5" y="0.0" width="235.5" height="34"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
+                                                        <connections>
+                                                            <outlet property="delegate" destination="ABr-0I-t1n" id="n9T-IH-GcY"/>
+                                                        </connections>
                                                     </textField>
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="8F4-oq-NrE">
-                                                <rect key="frame" x="0.0" y="41" width="288" height="22.5"/>
+                                                <rect key="frame" x="0.0" y="46" width="288" height="50.5"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0v2-uc-eV5">
                                                         <rect key="frame" x="0.0" y="0.0" width="288" height="20.5"/>
@@ -190,18 +193,24 @@
                                                             </label>
                                                         </subviews>
                                                     </stackView>
-                                                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="LSX-dv-P5K">
-                                                        <rect key="frame" x="0.0" y="20.5" width="288" height="2"/>
-                                                    </progressView>
+                                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="PLM-F9-Vcl">
+                                                        <rect key="frame" x="-2" y="20.5" width="292" height="31"/>
+                                                        <connections>
+                                                            <action selector="setProgress:" destination="ABr-0I-t1n" eventType="valueChanged" id="yWs-jz-jGw"/>
+                                                        </connections>
+                                                    </slider>
                                                 </subviews>
                                             </stackView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hgK-Aw-wIA">
-                                                <rect key="frame" x="0.0" y="70.5" width="288" height="33"/>
+                                                <rect key="frame" x="0.0" y="108.5" width="288" height="33"/>
                                                 <color key="backgroundColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                 <state key="normal" title="Play">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="play:" destination="ABr-0I-t1n" eventType="touchUpInside" id="48D-iw-ZZM"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -216,6 +225,15 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Detail" id="bCJ-iE-SkW"/>
+                    <connections>
+                        <outlet property="activeItemElements" destination="j8M-Q9-2uM" id="Zaj-UJ-K1r"/>
+                        <outlet property="durationLabel" destination="OaL-2m-emf" id="1d3-95-j6e"/>
+                        <outlet property="nameTextField" destination="wJG-rr-x6F" id="aB9-z5-Ctb"/>
+                        <outlet property="noRecordingLabel" destination="hp5-qn-EZy" id="rEZ-pO-ywF"/>
+                        <outlet property="playButton" destination="hgK-Aw-wIA" id="93Y-4B-ttt"/>
+                        <outlet property="progressLabel" destination="Iix-EA-8vy" id="5GB-Qi-8z0"/>
+                        <outlet property="progressSlider" destination="PLM-F9-Vcl" id="4oj-os-xdg"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FN9-CZ-sOj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
