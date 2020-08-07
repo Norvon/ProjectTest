@@ -9,7 +9,7 @@
 import UIKit
 
 class FolderViewController: UITableViewController {
-
+    
     var folder: Folder = Store.shared.rootFolder {
         didSet {
             tableView.reloadData()
@@ -24,13 +24,13 @@ class FolderViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         navigationItem.leftItemsSupplementBackButton = true
         navigationItem.leftBarButtonItem = editButtonItem
         
         NotificationCenter.default.addObserver(self, selector: #selector(handleChangeNotification(_:)), name: Store.changedNotification, object: nil)
     }
-
+    
     @objc func handleChangeNotification(_ notification: Notification) {
         if let item = notification.object as? Folder, item === folder {
             let reason = notification.userInfo?[Item.changeReasonKey] as? String
@@ -52,7 +52,7 @@ class FolderViewController: UITableViewController {
             case let (Item.removed, _, (oldIndex as Int)?):
                 tableView.deleteRows(at: [IndexPath(row: oldIndex, section: 0)], with: .right)
             case let (Item.added, (newIndex as Int)?, _):
-                    tableView.insertRows(at: [IndexPath(row: newIndex, section: 0)], with: .left)
+                tableView.insertRows(at: [IndexPath(row: newIndex, section: 0)], with: .left)
             case let (Item.renamed, (newIndex as Int)?, (oldIndex as Int)?):
                 tableView.moveRow(at: IndexPath(row: oldIndex, section: 0), to: IndexPath(row: newIndex, section: 0))
                 tableView.reloadRows(at: [IndexPath(row: newIndex, section: 0)], with: .fade)
@@ -92,7 +92,7 @@ class FolderViewController: UITableViewController {
             guard
                 let folderVC = segue.destination as? FolderViewController,
                 let selectedFolder = selectedItem as? Folder
-            else { fatalError() }
+                else { fatalError() }
             folderVC.folder = selectedFolder
         }
         else if identifier == .showRecorder {
@@ -100,9 +100,9 @@ class FolderViewController: UITableViewController {
             recordVC.folder = folder
         } else if identifier == .showPlayer {
             guard
-            let playVC = (segue.destination as? UINavigationController)?.topViewController as? PlayViewController,
-            let recording = selectedItem as? Recording
-            else { fatalError() }
+                let playVC = (segue.destination as? UINavigationController)?.topViewController as? PlayViewController,
+                let recording = selectedItem as? Recording
+                else { fatalError() }
             playVC.recording = recording
             if let indexPath = tableView.indexPathForSelectedRow {
                 tableView.deselectRow(at: indexPath, animated: true)
@@ -114,7 +114,7 @@ class FolderViewController: UITableViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return folder.contents.count
     }
@@ -126,7 +126,7 @@ class FolderViewController: UITableViewController {
         cell.textLabel!.text = "\((item is Recording) ? "🔊" : "📁")  \(item.name)"
         return cell
     }
-
+    
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }

@@ -29,9 +29,9 @@ class Item {
         if let p = parent {
             let (oldIndex, newIndex) = p.reSort(changedItem: self)
             store?.save(self, userInfo: [Item.changeReasonKey: Item.renamed,
-                                        Item.oldValueKey: oldIndex,
-                                        Item.newValueKey: newIndex,
-                                        Item.parentFolderKey: p])
+                                         Item.oldValueKey: oldIndex,
+                                         Item.newValueKey: newIndex,
+                                         Item.parentFolderKey: p])
         }
     }
     

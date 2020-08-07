@@ -30,7 +30,7 @@ class Recording: Item, Codable {
         let name = try c.decode(String.self, forKey: .name)
         super.init(name: name, uuid: uuid)
     }
-
+    
     func encode(to encoder: Encoder) throws {
         var c = encoder.container(keyedBy: RecordingKeys.self)
         try c.encode(name, forKey: .name)
