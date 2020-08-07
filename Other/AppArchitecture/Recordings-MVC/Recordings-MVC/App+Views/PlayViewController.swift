@@ -9,7 +9,7 @@
 import UIKit
 
 class PlayViewController: UIViewController, UITextFieldDelegate {
-
+    
     @IBOutlet var nameTextField: UITextField!
     @IBOutlet var playButton: UIButton!
     @IBOutlet var progressLabel: UILabel!
@@ -24,10 +24,10 @@ class PlayViewController: UIViewController, UITextFieldDelegate {
             updateForChangedRecording()
         }
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
         navigationItem.leftItemsSupplementBackButton = true
         updateForChangedRecording()
@@ -84,7 +84,7 @@ class PlayViewController: UIViewController, UITextFieldDelegate {
         progressSlider?.value = Float(progress)
         updatePlayButton()
     }
-
+    
     func updatePlayButton() {
         if audioPlayer?.isPlaying == true {
             playButton?.setTitle(.pause, for: .normal)
