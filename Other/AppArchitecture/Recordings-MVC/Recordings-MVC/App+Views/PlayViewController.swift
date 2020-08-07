@@ -64,7 +64,7 @@ class PlayViewController: UIViewController, UITextFieldDelegate {
                 title = r.name
                 nameTextField?.text = r.name
                 activeItemElements?.isHidden = false
-                noRecordingLabel?.isHighlighted = true
+                noRecordingLabel?.isHidden = true
             } else {
                 recording = nil
             }

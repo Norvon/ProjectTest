@@ -25,7 +25,7 @@ final class Recorder: NSObject, AVAudioRecorderDelegate {
             try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playAndRecord)
             try AVAudioSession.sharedInstance().setActive(true)
             AVAudioSession.sharedInstance().requestRecordPermission() { allowed in
-                if allowed {
+                if allowed { // 是否有权限
                     self.start(url)
                 } else {
                     self.update(nil)
