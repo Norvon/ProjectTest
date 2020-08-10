@@ -68,7 +68,7 @@ func uLog<T>(_ message: T, file: String = #file, function: String = #function, l
 }
 
 // MARK: Kingfisher
-extension KingfisherWrapper where Base: ImageView {
+extension KingfisherWrapper where Base: KFCrossPlatformImageView {
     @discardableResult
     public func setImage(urlString: String?,
                          placeholder: Placeholder? = UIImage(named: "normal_placeholder_h"))

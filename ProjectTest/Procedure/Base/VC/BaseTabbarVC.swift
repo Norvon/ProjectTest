@@ -16,7 +16,15 @@ class BaseTabbarVC: UITabBarController {
         tabBar.isTranslucent = false
         
         /// 首页
-        let onePageVC = TestVC()
+        let onePageVC = UHomeViewController(titles: ["推荐",
+                                                     "VIP",
+                                                     "订阅",
+                                                     "排行"],
+                                            vcs: [TestVC(),
+                                                  TestVC(),
+                                                  TestVC(),
+                                                  TestVC()],
+                                            pageStyle: .navigationBarSegment)
         addChildViewController(onePageVC,
                                title: "首页",
                                image: UIImage(named: "tab_home"),
