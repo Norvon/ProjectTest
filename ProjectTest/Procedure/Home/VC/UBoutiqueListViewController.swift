@@ -7,9 +7,15 @@
 //
 
 import UIKit
+import LLCycleScrollView
 
 class UBoutiqueListViewController: UBaseViewController {
 
+    
+    private lazy var collectionView: UICollectionView = {
+       let layout = 
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
