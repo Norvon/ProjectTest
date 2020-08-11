@@ -47,6 +47,19 @@ class UCollectionViewSectionBackgroundLayout: UICollectionViewFlowLayout {
             return
         }
 
-        self.descorationv
+        self.decorationViewAttrs.removeAll()
+        for section in 0..<numberOfSections {
+            let indexPath = IndexPath(item: 0, section: section)
+
+            guard let numberOfItems = collectionView?.numberOfItems(inSection: section),
+            numberOfSections > 0,
+            let firstItem = layoutAttributesForItem(at: indexPath),
+                let lastItem = layoutAttributesForItem(at: IndexPath(item: numberOfSections - 1, section: section)) else {
+                    continue
+            }
+
+            var inset = self.sectionInset
+            if 
+        }
     }
 }
