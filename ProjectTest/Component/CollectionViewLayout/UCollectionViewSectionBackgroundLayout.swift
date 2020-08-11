@@ -8,18 +8,45 @@
 
 import UIKit
 
+private let SectionBackground = "UCollectionReusableView"
+
+protocol UCollectionViewSectionBackgroundLayoutDelegateLayout: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        backgroudColorForSectionAt section: Int) -> UIColor
+}
+
+
+
 class UCollectionViewSectionBackgroundLayout: UICollectionViewFlowLayout {
-    
+
+    private var decorationViewAttrs: [UICollectionViewLayoutAttributes] = []
+
     override init() {
         super.init()
         setup()
     }
     
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: coder)
     }
-    
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        setup()
+    }
+
     func setup() {
-        self.register(<#T##nib: UINib?##UINib?#>, forDecorationViewOfKind: <#T##String#>)
+        self.register(UICollectionReusableView.classForCoder(), forDecorationViewOfKind: SectionBackground)
+    }
+
+    override func prepare() {
+        super.prepare()
+        guard let numberOfSections = self.collectionView?.numberOfSections,
+            let delegate = self.collectionView?.delegate as? UCollectionViewSectionBackgroundLayoutDelegateLayout else {
+            return
+        }
+
+        self.descorationv
     }
 }
