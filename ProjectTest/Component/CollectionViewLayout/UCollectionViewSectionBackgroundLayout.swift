@@ -59,7 +59,11 @@ class UCollectionViewSectionBackgroundLayout: UICollectionViewFlowLayout {
             }
 
             var inset = self.sectionInset
-            if 
+            if let delegateInset = delegate.collectionView?(self.collectionView!, layout: self, insetForSectionAt: section) {
+                inset = delegateInset
+            }
+
+            var sectionFrame = firstItem.frame.union(lastItem.frame)
         }
     }
 }
