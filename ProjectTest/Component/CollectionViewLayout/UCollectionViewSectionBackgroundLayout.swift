@@ -64,6 +64,9 @@ class UCollectionViewSectionBackgroundLayout: UICollectionViewFlowLayout {
             }
 
             var sectionFrame = firstItem.frame.union(lastItem.frame)
+            sectionFrame.origin.x = inset.left
+            sectionFrame.origin.y -= inset.top
+            
         }
     }
 }
