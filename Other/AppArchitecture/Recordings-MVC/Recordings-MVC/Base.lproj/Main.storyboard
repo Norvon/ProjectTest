@@ -239,6 +239,31 @@
             </objects>
             <point key="canvasLocation" x="-1524.375" y="485"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="O67-rS-Lk4">
+            <objects>
+                <viewController id="Q0B-Tu-MLb" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="fym-jq-sPx"/>
+                        <viewControllerLayoutGuide type="bottom" id="uLK-dl-VXV"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="qzf-xK-e9K">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pfw-fH-VYK">
+                                <rect key="frame" x="66" y="98" width="117" height="62"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="123"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="k1J-Me-wpm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-213.75" y="380"/>
+        </scene>
         <!--Record View Controller-->
         <scene sceneID="JUc-ll-hNI">
             <objects>
