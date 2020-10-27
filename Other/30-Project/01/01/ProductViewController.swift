@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreImage
 
 class ProductViewController: UIViewController {
     @IBOutlet var productImageView: UIImageView!
@@ -24,7 +25,14 @@ class ProductViewController: UIViewController {
     }
     
     @IBAction func addToCartButtonDidTap(_ sender: UIButton) {
-        print("Add to cart successfully")
+        
+        let filter = CIFilter.init(name: "CIQRCodeGenerator")
+        filter?.setDefaults()
+        let str = "https://m.orangecds.com/login"
+        let strData = str.data(using: .utf8)
+        filter?.setValue(strData, forKey: "inputMessage")
+        if let outImage = filter?.outputImage {
+            productImageView.image = UIImage(ciImage: outImage, scale: 0.5, orientation: .up)
+        }
     }
-    
 }
