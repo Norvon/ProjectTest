@@ -6,17 +6,29 @@
 //
 
 import UIKit
+import IQKeyboardManagerSwift
+import Alamofire
 
 extension AppDelegate {
     
     /// 初始化键盘 IQKeyboard
     func initIQKeyboard() {
-        
+        IQKeyboardManager.shared.enable = true
+        IQKeyboardManager.shared.shouldResignOnTouchOutside = true
     }
     
     /// 初始化网络
     func initNetwork() {
-        
+        reachability?.listener = { status in
+            switch status {
+            case .reachable(.wwan):
+                #warning("UNoticeBar")
+                print("主人,检测到您正在使用移动数据")
+            default:
+                break
+            }
+        }
+        reachability?.startListening()
     }
     
     /// 显示跟控制器

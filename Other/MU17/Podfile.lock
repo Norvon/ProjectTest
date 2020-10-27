@@ -1,3 +1,24 @@
-PODFILE CHECKSUM: 9c9e7fde62a97233a8b137a27c269ab84a0f0120
+PODS:
+  - Alamofire (4.9.1)
+  - Hue (5.0.0)
+  - IQKeyboardManagerSwift (6.5.6)
+
+DEPENDENCIES:
+  - Alamofire
+  - Hue
+  - IQKeyboardManagerSwift
+
+SPEC REPOS:
+  trunk:
+    - Alamofire
+    - Hue
+    - IQKeyboardManagerSwift
+
+SPEC CHECKSUMS:
+  Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
+  Hue: c129cb67be7d093a82bbbc30ce8a96757bf6f37a
+  IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
+
+PODFILE CHECKSUM: 63147fb4eb0929c588436ac3ed034c435ac7250a
 
 COCOAPODS: 1.9.1

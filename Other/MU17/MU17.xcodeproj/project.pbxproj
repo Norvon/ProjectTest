@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -18,6 +18,8 @@
 		889FFA2825480F6500FC13C1 /* NORCateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889FFA2725480F6500FC13C1 /* NORCateVC.swift */; };
 		889FFA2B25480F7B00FC13C1 /* NORBookVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889FFA2A25480F7B00FC13C1 /* NORBookVC.swift */; };
 		889FFA2E25480F9200FC13C1 /* NORMineVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889FFA2D25480F9200FC13C1 /* NORMineVC.swift */; };
+		889FFA3025481AFC00FC13C1 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889FFA2F25481AFC00FC13C1 /* Global.swift */; };
+		889FFA332548264B00FC13C1 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889FFA322548264B00FC13C1 /* UIColorExtension.swift */; };
 		9D6C10927C8AD4D7B0C979A2 /* Pods_MU17.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BEE7741894733BD5AEB017E /* Pods_MU17.framework */; };
 /* End PBXBuildFile section */
 
@@ -38,6 +40,8 @@
 		889FFA2725480F6500FC13C1 /* NORCateVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NORCateVC.swift; sourceTree = "<group>"; };
 		889FFA2A25480F7B00FC13C1 /* NORBookVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NORBookVC.swift; sourceTree = "<group>"; };
 		889FFA2D25480F9200FC13C1 /* NORMineVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NORMineVC.swift; sourceTree = "<group>"; };
+		889FFA2F25481AFC00FC13C1 /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
+		889FFA322548264B00FC13C1 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,9 +85,11 @@
 		8893BC7D254182040043E2FD /* MU17 */ = {
 			isa = PBXGroup;
 			children = (
+				889FFA2F25481AFC00FC13C1 /* Global.swift */,
 				8893BC8C254182070043E2FD /* Info.plist */,
 				8893BC87254182070043E2FD /* Assets.xcassets */,
 				8893BC89254182070043E2FD /* LaunchScreen.storyboard */,
+				889FFA312548263D00FC13C1 /* Extension */,
 				889FFA2225480EF600FC13C1 /* Modules */,
 				889FFA1B2548078800FC13C1 /* Base */,
 				889FFA162548004A00FC13C1 /* main */,
@@ -153,6 +159,14 @@
 			path = Mine;
 			sourceTree = "<group>";
 		};
+		889FFA312548263D00FC13C1 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				889FFA322548264B00FC13C1 /* UIColorExtension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		E9BC923F95F035E6F75A2ACD /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -173,6 +187,7 @@
 				8893BC77254182040043E2FD /* Sources */,
 				8893BC78254182040043E2FD /* Frameworks */,
 				8893BC79254182040043E2FD /* Resources */,
+				C2A772A47F37BD7192A147D4 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -252,6 +267,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		C2A772A47F37BD7192A147D4 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MU17/Pods-MU17-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MU17/Pods-MU17-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MU17/Pods-MU17-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -267,6 +299,8 @@
 				889FFA2B25480F7B00FC13C1 /* NORBookVC.swift in Sources */,
 				889FFA2E25480F9200FC13C1 /* NORMineVC.swift in Sources */,
 				8893BC7F254182040043E2FD /* AppDelegate.swift in Sources */,
+				889FFA332548264B00FC13C1 /* UIColorExtension.swift in Sources */,
+				889FFA3025481AFC00FC13C1 /* Global.swift in Sources */,
 				889FFA2525480F3F00FC13C1 /* NORHomeVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

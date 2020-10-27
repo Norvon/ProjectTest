@@ -7,12 +7,17 @@
 //
 
 import UIKit
+import Alamofire
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     var orientation: UIInterfaceOrientationMask = .portrait
+    
+    lazy var reachability: NetworkReachabilityManager? = {
+        return NetworkReachabilityManager(host: "http://app.u17.com")
+    }()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         /// 初始化键盘
