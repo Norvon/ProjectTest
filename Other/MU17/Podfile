@@ -6,8 +6,17 @@ target 'MU17' do
   use_frameworks!
   
   pod 'IQKeyboardManagerSwift' # 键盘监听
-  pod 'Alamofire'
-  pod 'Hue'
+  pod 'Alamofire' # 网络
+  pod 'Hue' # 颜色
+  pod 'SnapKit' # 布局
+  pod 'Kingfisher' # 图片下载
+  pod 'Reusable' # cell 复用
+  pod 'MJRefresh' # 刷新
+  pod 'MBProgressHUD' # 进度
+  pod 'HandyJSON' # json model
+  pod 'LLCycleScrollView' # 轮播图
+  
+  
 
   
 

@@ -1,24 +1,57 @@
 PODS:
   - Alamofire (4.9.1)
+  - HandyJSON (5.0.2)
   - Hue (5.0.0)
   - IQKeyboardManagerSwift (6.5.6)
+  - Kingfisher (4.10.1)
+  - LLCycleScrollView (1.5.4):
+    - Kingfisher (<= 4.10.1)
+  - MBProgressHUD (1.2.0)
+  - MJRefresh (3.5.0)
+  - Reusable (4.1.1):
+    - Reusable/Storyboard (= 4.1.1)
+    - Reusable/View (= 4.1.1)
+  - Reusable/Storyboard (4.1.1)
+  - Reusable/View (4.1.1)
+  - SnapKit (4.2.0)
 
 DEPENDENCIES:
   - Alamofire
+  - HandyJSON
   - Hue
   - IQKeyboardManagerSwift
+  - Kingfisher
+  - LLCycleScrollView
+  - MBProgressHUD
+  - MJRefresh
+  - Reusable
+  - SnapKit
 
 SPEC REPOS:
   trunk:
     - Alamofire
+    - HandyJSON
     - Hue
     - IQKeyboardManagerSwift
+    - Kingfisher
+    - LLCycleScrollView
+    - MBProgressHUD
+    - MJRefresh
+    - Reusable
+    - SnapKit
 
 SPEC CHECKSUMS:
   Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
+  HandyJSON: 9e4e236f5d2dbefad5155a77417bbea438201c03
   Hue: c129cb67be7d093a82bbbc30ce8a96757bf6f37a
   IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
+  Kingfisher: c148cd7b47ebde9989f6bc7c27dcaa79d81279a0
+  LLCycleScrollView: 77f6e11980d1cd010ee9ee87e94da4e8026ccd21
+  MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
+  MJRefresh: 6afc955813966afb08305477dd7a0d9ad5e79a16
+  Reusable: 53a9acf5c536f229b31b5865782414b508252ddb
+  SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
 
-PODFILE CHECKSUM: 63147fb4eb0929c588436ac3ed034c435ac7250a
+PODFILE CHECKSUM: ef519a12bf9d68c73914058680bd38e9e1e201e5
 
 COCOAPODS: 1.9.1
