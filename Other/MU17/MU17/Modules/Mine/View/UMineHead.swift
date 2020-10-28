@@ -26,7 +26,18 @@ class UMineHead: UIView {
     
     func configUI() {
         addSubview(bgView)
-        bgView.snp.mak
+        bgView.snp.makeConstraints { $0.edges.equalToSuperview() }
+        
+        
+    }
+    
+    func sexTypeDidChange() {
+        let sexType = UserDefaults.standard.integer(forKey: String.sexTypeKey)
+        if sexType == 1 {
+            bgView.image = UIImage(named: "mine_bg_for_boy")
+        } else {
+            bgView.image = UIImage(named: "mine_bg_for_girl")
+        }
     }
     
 }

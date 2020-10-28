@@ -38,13 +38,45 @@ class NORMineVC: NORBaseVC {
         ]
     }()
     
+    private lazy var head: UMineHead = {
+        return UMineHead(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 200))
+    }()
+    
+    private lazy var navigationBarY: CGFloat = {
+        return navigationController?.navigationBar.frame.maxY ?? 0
+    }()
+    
+    lazy var tableView: UITableView = {
+        let tw = UITableView(frame: .zero, style: .grouped)
+        tw.backgroundColor = .background
+        tw.delegate = self
+        tw.dataSource = self
+        tw.register(cellType: UBaseTableViewCell.self)
+        return tw
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        edgesForExtendedLayout = .top
+    }
+    
+    override func configUI() {
+        view.addSubview(tableView)
+        tableView.snp.makeConstraints {
+            $0.edges.equalTo(self.view.usnp.edges).priority(.low)
+            $0.top.equalToSuperview()
+        }
+        
+        tableView.para
     }
     
     /// 修改 statusbar 颜色
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .default
     }
+}
+
+extension NORMineVC: UITableViewDelegate, UITableViewDataSource {
     
 }

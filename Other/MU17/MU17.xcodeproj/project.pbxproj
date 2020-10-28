@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		88835D1725493C2100E797E2 /* UIBarButtonItemExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88835D1625493C2100E797E2 /* UIBarButtonItemExtension.swift */; };
 		88835D1A2549531C00E797E2 /* UMineHead.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88835D192549531C00E797E2 /* UMineHead.swift */; };
+		88835D1E2549719600E797E2 /* UBaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88835D1D2549719600E797E2 /* UBaseTableViewCell.swift */; };
 		8893BC7F254182040043E2FD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8893BC7E254182040043E2FD /* AppDelegate.swift */; };
 		8893BC88254182070043E2FD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8893BC87254182070043E2FD /* Assets.xcassets */; };
 		8893BC8B254182070043E2FD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8893BC89254182070043E2FD /* LaunchScreen.storyboard */; };
@@ -31,6 +32,7 @@
 		5EFFB36CFF0C9FA03BC20F34 /* Pods-MU17.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MU17.release.xcconfig"; path = "Target Support Files/Pods-MU17/Pods-MU17.release.xcconfig"; sourceTree = "<group>"; };
 		88835D1625493C2100E797E2 /* UIBarButtonItemExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBarButtonItemExtension.swift; sourceTree = "<group>"; };
 		88835D192549531C00E797E2 /* UMineHead.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UMineHead.swift; sourceTree = "<group>"; };
+		88835D1D2549719600E797E2 /* UBaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UBaseTableViewCell.swift; sourceTree = "<group>"; };
 		8893BC7B254182040043E2FD /* MU17.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MU17.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8893BC7E254182040043E2FD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8893BC87254182070043E2FD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -72,6 +74,24 @@
 			isa = PBXGroup;
 			children = (
 				88835D192549531C00E797E2 /* UMineHead.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		88835D1B2549715A00E797E2 /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				889FFA1C254807C200FC13C1 /* NORBaseTabBarVC.swift */,
+				889FFA1E2548087300FC13C1 /* NORBaseVC.swift */,
+				889FFA20254809BB00FC13C1 /* NORNavigationC.swift */,
+			);
+			path = VC;
+			sourceTree = "<group>";
+		};
+		88835D1C2549716200E797E2 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				88835D1D2549719600E797E2 /* UBaseTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -121,9 +141,8 @@
 		889FFA1B2548078800FC13C1 /* Base */ = {
 			isa = PBXGroup;
 			children = (
-				889FFA1C254807C200FC13C1 /* NORBaseTabBarVC.swift */,
-				889FFA1E2548087300FC13C1 /* NORBaseVC.swift */,
-				889FFA20254809BB00FC13C1 /* NORNavigationC.swift */,
+				88835D1C2549716200E797E2 /* View */,
+				88835D1B2549715A00E797E2 /* VC */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -311,6 +330,7 @@
 				889FFA2825480F6500FC13C1 /* NORCateVC.swift in Sources */,
 				889FFA1F2548087300FC13C1 /* NORBaseVC.swift in Sources */,
 				889FFA1A2548060E00FC13C1 /* AppdelegateExtension.swift in Sources */,
+				88835D1E2549719600E797E2 /* UBaseTableViewCell.swift in Sources */,
 				889FFA2B25480F7B00FC13C1 /* NORBookVC.swift in Sources */,
 				889FFA2E25480F9200FC13C1 /* NORMineVC.swift in Sources */,
 				8893BC7F254182040043E2FD /* AppDelegate.swift in Sources */,

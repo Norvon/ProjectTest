@@ -7,8 +7,6 @@
 
 import UIKit
 import IQKeyboardManagerSwift
-import Alamofire
-
 extension AppDelegate {
     
     /// 初始化键盘 IQKeyboard
