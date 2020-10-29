@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		884A402B254AA74800C9E7C3 /* ParallaxHeaderMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884A4028254AA73700C9E7C3 /* ParallaxHeaderMode.swift */; };
+		884A402C254AA74800C9E7C3 /* UIScrollView+ParallaxHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884A4029254AA73700C9E7C3 /* UIScrollView+ParallaxHeader.swift */; };
+		884A402D254AA74800C9E7C3 /* ParallaxHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884A402A254AA73700C9E7C3 /* ParallaxHeader.swift */; };
 		88835D1725493C2100E797E2 /* UIBarButtonItemExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88835D1625493C2100E797E2 /* UIBarButtonItemExtension.swift */; };
 		88835D1A2549531C00E797E2 /* UMineHead.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88835D192549531C00E797E2 /* UMineHead.swift */; };
 		88835D1E2549719600E797E2 /* UBaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88835D1D2549719600E797E2 /* UBaseTableViewCell.swift */; };
@@ -30,6 +33,9 @@
 		0B1AA405A08477BFB1960229 /* Pods-MU17.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MU17.debug.xcconfig"; path = "Target Support Files/Pods-MU17/Pods-MU17.debug.xcconfig"; sourceTree = "<group>"; };
 		1BEE7741894733BD5AEB017E /* Pods_MU17.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MU17.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EFFB36CFF0C9FA03BC20F34 /* Pods-MU17.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MU17.release.xcconfig"; path = "Target Support Files/Pods-MU17/Pods-MU17.release.xcconfig"; sourceTree = "<group>"; };
+		884A4028254AA73700C9E7C3 /* ParallaxHeaderMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParallaxHeaderMode.swift; sourceTree = "<group>"; };
+		884A4029254AA73700C9E7C3 /* UIScrollView+ParallaxHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+ParallaxHeader.swift"; sourceTree = "<group>"; };
+		884A402A254AA73700C9E7C3 /* ParallaxHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParallaxHeader.swift; sourceTree = "<group>"; };
 		88835D1625493C2100E797E2 /* UIBarButtonItemExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBarButtonItemExtension.swift; sourceTree = "<group>"; };
 		88835D192549531C00E797E2 /* UMineHead.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UMineHead.swift; sourceTree = "<group>"; };
 		88835D1D2549719600E797E2 /* UBaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UBaseTableViewCell.swift; sourceTree = "<group>"; };
@@ -68,6 +74,16 @@
 				1BEE7741894733BD5AEB017E /* Pods_MU17.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		884A4027254AA73700C9E7C3 /* ParallaxHeader */ = {
+			isa = PBXGroup;
+			children = (
+				884A4028254AA73700C9E7C3 /* ParallaxHeaderMode.swift */,
+				884A4029254AA73700C9E7C3 /* UIScrollView+ParallaxHeader.swift */,
+				884A402A254AA73700C9E7C3 /* ParallaxHeader.swift */,
+			);
+			path = ParallaxHeader;
 			sourceTree = "<group>";
 		};
 		88835D18254952FF00E797E2 /* View */ = {
@@ -117,6 +133,7 @@
 		8893BC7D254182040043E2FD /* MU17 */ = {
 			isa = PBXGroup;
 			children = (
+				884A4027254AA73700C9E7C3 /* ParallaxHeader */,
 				889FFA2F25481AFC00FC13C1 /* Global.swift */,
 				8893BC8C254182070043E2FD /* Info.plist */,
 				8893BC87254182070043E2FD /* Assets.xcassets */,
@@ -324,6 +341,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				884A402B254AA74800C9E7C3 /* ParallaxHeaderMode.swift in Sources */,
+				884A402C254AA74800C9E7C3 /* UIScrollView+ParallaxHeader.swift in Sources */,
+				884A402D254AA74800C9E7C3 /* ParallaxHeader.swift in Sources */,
 				889FFA21254809BB00FC13C1 /* NORNavigationC.swift in Sources */,
 				88835D1A2549531C00E797E2 /* UMineHead.swift in Sources */,
 				889FFA1D254807C200FC13C1 /* NORBaseTabBarVC.swift in Sources */,
@@ -476,7 +496,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = MU17/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -495,7 +515,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = MU17/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -28,10 +28,11 @@ class UMineHead: UIView {
         addSubview(bgView)
         bgView.snp.makeConstraints { $0.edges.equalToSuperview() }
         
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(sexTypeDidChange), name: .USexTypeDidChange, object: nil)
+        sexTypeDidChange()
     }
     
-    func sexTypeDidChange() {
+    @objc func sexTypeDidChange() {
         let sexType = UserDefaults.standard.integer(forKey: String.sexTypeKey)
         if sexType == 1 {
             bgView.image = UIImage(named: "mine_bg_for_boy")
@@ -39,5 +40,4 @@ class UMineHead: UIView {
             bgView.image = UIImage(named: "mine_bg_for_girl")
         }
     }
-    
 }

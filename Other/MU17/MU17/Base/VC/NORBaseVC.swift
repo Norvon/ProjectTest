@@ -13,13 +13,13 @@ class NORBaseVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .background
+        view.backgroundColor = UIColor.background
         if #available(iOS 11.0, *) {
             UIScrollView.appearance().contentInsetAdjustmentBehavior = .never
         } else {
             automaticallyAdjustsScrollViewInsets = false
         }
-
+        
         configUI()
     }
     
@@ -31,10 +31,7 @@ class NORBaseVC: UIViewController {
     func configUI() {}
     
     func configNavigationBar() {
-        guard let navi = navigationController else {
-            return
-        }
-        
+        guard let navi = navigationController else { return }
         if navi.visibleViewController == self {
             navi.barStyle(.theme)
             navi.disablePopGesture = false

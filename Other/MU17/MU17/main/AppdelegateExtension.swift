@@ -53,4 +53,12 @@ extension AppDelegate {
             UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation")
         }
     }
+    
+    func saveSex() {
+        let defaults = UserDefaults.standard
+        if defaults.value(forKey: .sexTypeKey) == nil {
+            defaults.set(1, forKey: .sexTypeKey)
+            defaults.synchronize()
+        }
+    }
 }

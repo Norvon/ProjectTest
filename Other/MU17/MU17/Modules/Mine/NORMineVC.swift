@@ -51,6 +51,7 @@ class NORMineVC: NORBaseVC {
         tw.backgroundColor = .background
         tw.delegate = self
         tw.dataSource = self
+        
         tw.register(cellType: UBaseTableViewCell.self)
         return tw
     }()
@@ -67,16 +68,69 @@ class NORMineVC: NORBaseVC {
             $0.edges.equalTo(self.view.usnp.edges).priority(.low)
             $0.top.equalToSuperview()
         }
-        
-        tableView.para
+        tableView.layoutIfNeeded()
+        tableView.parallaxHeader.view = head
+        tableView.parallaxHeader.height = 200
+        tableView.parallaxHeader.minimumHeight = navigationBarY
+        tableView.parallaxHeader.mode = .fill
     }
     
-    /// 修改 statusbar 颜色
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .default
+    override func configNavigationBar() {
+        super.configNavigationBar()
+        navigationController?.barStyle(.clear)
+        tableView.contentOffset = CGPoint(x: 0, y: -tableView.parallaxHeader.height - kNavBarHeight)
+        
     }
 }
 
 extension NORMineVC: UITableViewDelegate, UITableViewDataSource {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.y >= -(scrollView.parallaxHeader.minimumHeight) {
+            navigationController?.barStyle(.theme)
+            navigationItem.title = "我的"
+        } else {
+            navigationController?.barStyle(.clear)
+            navigationItem.title = ""
+        }
+    }
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return myArray.count
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        let sectionArray = myArray[section]
+        return sectionArray.count
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 0.01
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return nil
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(for: indexPath, cellType: UBaseTableViewCell.self)
+        cell.accessoryType = .disclosureIndicator
+        cell.selectionStyle = .default
+        let sectionArray = myArray[indexPath.section]
+        let dict: [String: String] = sectionArray[indexPath.row]
+        cell.imageView?.image = UIImage(named: dict["icon"] ?? "")
+        cell.textLabel?.text = dict["title"]
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 10
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return nil
+    }
 }

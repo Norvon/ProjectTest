@@ -14,10 +14,10 @@ class NORNavigationC: UINavigationController {
 
         guard let interactionGes = interactivePopGestureRecognizer else { return }
         guard let targetView = interactionGes.view else { return }
-        guard let internalTargets = interactionGes.value(forKey: "targets") as? [NSObject] else { return }
+        guard let internalTargets = interactionGes.value(forKeyPath: "targets") as? [NSObject] else { return }
         guard let internalTarget = internalTargets.first?.value(forKey: "target") else { return }
         let action = Selector(("handleNavigationTransition:"))
-        
+
         let fullScreenGesture = UIPanGestureRecognizer(target: internalTarget, action: action)
         fullScreenGesture.delegate = self
         targetView.addGestureRecognizer(fullScreenGesture)
@@ -25,9 +25,7 @@ class NORNavigationC: UINavigationController {
     }
     
     override func pushViewController(_ viewController: UIViewController, animated: Bool) {
-        if viewControllers.count > 0 {
-            viewController.hidesBottomBarWhenPushed = true
-        }
+        if viewControllers.count > 0 { viewController.hidesBottomBarWhenPushed = true }
         super.pushViewController(viewController, animated: animated)
     }
 }
@@ -35,9 +33,7 @@ class NORNavigationC: UINavigationController {
 extension NORNavigationC: UIGestureRecognizerDelegate {
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         let isLeftToRight = UIApplication.shared.userInterfaceLayoutDirection == .leftToRight
-        guard let ges = gestureRecognizer as? UIPanGestureRecognizer else {
-            return true
-        }
+        guard let ges = gestureRecognizer as? UIPanGestureRecognizer else { return true }
         if ges.translation(in: gestureRecognizer.view).x * (isLeftToRight ? 1 : -1) <= 0
             || disablePopGesture {
             return false
@@ -48,9 +44,7 @@ extension NORNavigationC: UIGestureRecognizerDelegate {
 
 extension NORNavigationC {
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        guard let topVC = topViewController else {
-            return .lightContent
-        }
+        guard let topVC = topViewController else { return .lightContent }
         return topVC.preferredStatusBarStyle
     }
 }
@@ -76,7 +70,7 @@ extension UINavigationController {
     }
     
     func barStyle(_ style: NORNavigationBarStyle) {
-        switch style {
+       switch style {
         case .theme:
             navigationBar.barStyle = .black
             navigationBar.setBackgroundImage(UIImage(named: "nav_bg"), for: .default)
