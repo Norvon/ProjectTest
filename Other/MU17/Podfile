@@ -16,7 +16,8 @@ target 'MU17' do
   pod 'HandyJSON' # json model
   pod 'LLCycleScrollView' # 轮播图
 #  pod 'ParallaxHeader' #
-  
+  pod 'HMSegmentedControl'
+  pod 'Then'
 
   
 

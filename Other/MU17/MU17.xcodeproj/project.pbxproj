@@ -26,6 +26,8 @@
 		889FFA2E25480F9200FC13C1 /* NORMineVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889FFA2D25480F9200FC13C1 /* NORMineVC.swift */; };
 		889FFA3025481AFC00FC13C1 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889FFA2F25481AFC00FC13C1 /* Global.swift */; };
 		889FFA332548264B00FC13C1 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889FFA322548264B00FC13C1 /* UIColorExtension.swift */; };
+		88F1A328255CD03D00CDA612 /* UPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F1A327255CD03D00CDA612 /* UPageViewController.swift */; };
+		88F1A32A255CD7BB00CDA612 /* NORTestVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F1A329255CD7BB00CDA612 /* NORTestVC.swift */; };
 		9D6C10927C8AD4D7B0C979A2 /* Pods_MU17.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BEE7741894733BD5AEB017E /* Pods_MU17.framework */; };
 /* End PBXBuildFile section */
 
@@ -54,6 +56,8 @@
 		889FFA2D25480F9200FC13C1 /* NORMineVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NORMineVC.swift; sourceTree = "<group>"; };
 		889FFA2F25481AFC00FC13C1 /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		889FFA322548264B00FC13C1 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
+		88F1A327255CD03D00CDA612 /* UPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UPageViewController.swift; sourceTree = "<group>"; };
+		88F1A329255CD7BB00CDA612 /* NORTestVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NORTestVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +104,7 @@
 				889FFA1C254807C200FC13C1 /* NORBaseTabBarVC.swift */,
 				889FFA1E2548087300FC13C1 /* NORBaseVC.swift */,
 				889FFA20254809BB00FC13C1 /* NORNavigationC.swift */,
+				88F1A327255CD03D00CDA612 /* UPageViewController.swift */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -204,6 +209,7 @@
 			children = (
 				88835D18254952FF00E797E2 /* View */,
 				889FFA2D25480F9200FC13C1 /* NORMineVC.swift */,
+				88F1A329255CD7BB00CDA612 /* NORTestVC.swift */,
 			);
 			path = Mine;
 			sourceTree = "<group>";
@@ -350,8 +356,10 @@
 				889FFA2825480F6500FC13C1 /* NORCateVC.swift in Sources */,
 				889FFA1F2548087300FC13C1 /* NORBaseVC.swift in Sources */,
 				889FFA1A2548060E00FC13C1 /* AppdelegateExtension.swift in Sources */,
+				88F1A328255CD03D00CDA612 /* UPageViewController.swift in Sources */,
 				88835D1E2549719600E797E2 /* UBaseTableViewCell.swift in Sources */,
 				889FFA2B25480F7B00FC13C1 /* NORBookVC.swift in Sources */,
+				88F1A32A255CD7BB00CDA612 /* NORTestVC.swift in Sources */,
 				889FFA2E25480F9200FC13C1 /* NORMineVC.swift in Sources */,
 				8893BC7F254182040043E2FD /* AppDelegate.swift in Sources */,
 				88835D1725493C2100E797E2 /* UIBarButtonItemExtension.swift in Sources */,

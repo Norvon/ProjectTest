@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import Then
 
 class NORBaseVC: UIViewController {
 
@@ -46,6 +47,12 @@ class NORBaseVC: UIViewController {
     
     @objc func pressBack() {
         navigationController?.popViewController(animated: true)
+    }
+    
+    deinit {
+        
+        print("⚠️⚠️⚠️⚠️⚠️⚠️\(type(of: self)) 已经释放")
+        
     }
 }
 
