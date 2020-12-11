@@ -14,8 +14,8 @@ final class Mood: NSManagedObject {
     @NSManaged fileprivate(set) var date: Date
     @NSManaged fileprivate(set) var colors: [UIColor]
     
-    static func insert(into context: NSManagedObjectContext, image: UIImage) -> Mood {
-        let mood: Mood = context.inser
-    }
+//    static func insert(into context: NSManagedObjectContext, image: UIImage) -> Mood {
+//        let mood: Mood = context.inser
+//    }
 }
 
